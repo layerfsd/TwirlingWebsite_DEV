@@ -1,0 +1,239 @@
+<include file="Public/header" />
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/script/artDialog/artDialog.css">
+<script src="__PUBLIC__/Home/script/artDialog/artDialog.js"></script>
+<body>
+	<div class="userPageTitle">
+		<div class="inc">
+			<h1 class="pageName">视音频管理</h1>
+		</div>
+		<div class="pageTitleBg"></div>
+	</div>
+	<div class="userPageContent inc videoOverList">
+		<p class="createVideo">
+			<a href="__ROOT__/Home/Video/goAdd"> 创建分轨合成任务<span></span>
+			</a>
+		</p>
+		<p class="tabNav">
+			<a href="__ROOT__/Home/Video/golist?status=3"<if
+					condition="$status == 3">class="label"</if>>已合成</a> <a
+				href="__ROOT__/Home/Video/golist?status=2"<if
+					condition="$status == 2">class="label"</if>>合成中</a> <a
+				href="__ROOT__/Home/Video/golist?status=1"<if
+					condition="$status == 1">class="label"</if>>待合成</a>
+		</p>
+
+
+
+		<div class="ulList">
+			<ul>
+				<foreach name="list" item="video">
+				<li id="{$video.video_uuid}">
+					<figure>
+
+					<if condition="$status == 3">
+						<a href="{:U('home/video/videoplay')}?video_uuid={$video.video_uuid}" target="_blank">
+							<img  width="260" height="146" src="{$video.aliyun_url}">
+					 	</a>
+					</if>
+
+
+					<if condition="$status != 3">
+							<video width="260" height="146" src="{$video.aliyun_url}" controls="controls">
+					</if>
+
+
+						<!-- <if condition="$status == 3">
+						</if>
+						<if condition="$status == 1 || $status == 2">
+						<video width="260" height="146" src="{$video.aliyun_url}"
+							controls="controls"></if> -->
+					</figure>
+					<div class="videoDes">
+						<h3>
+							<span id="video_title_{$video.video_uuid}">{$video.video_title}</span>
+							<em> <if condition="$status eq 3"> <i class="price">￥&nbsp;{$video.order_info.order_money}
+
+
+                            </i>
+                                <a class='down_noalert' href="/vr_demo_php/vr.php?video_uuid={$video.video_uuid}">播放</a>
+								<?php if($video['order_info']['status'] == 0):?>
+                                    <a class='down_noalert' href="{:U('home/user/buy')}?order_sn={$video.order_info.order_sn}"><span></span>付费/下载</a>
+                                <?php elseif($video['order_info']['status'] == 1):?>
+                                    <a class='down_noalert' href="{:U('home/video/down_load')}?uuid={$video.video_uuid}"><span></span>下载</a>
+
+                                <?php endif;?>
+
+
+
+                                <a
+									class='edit' href="javascript:;"><span></span>编辑</a> <a
+									class='delete' href="javascript:;"><span></span>删除</a> </if>
+							</em>
+						</h3>
+						<section>
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<if condition="$video.order_info neq null">
+									<tr>
+										<td>
+											<a href="__ROOT__/Home/user/index">
+												订单号:{$video.order_info.order_sn}
+											</a>
+										</td>
+									</tr>
+								</if>
+								<tr>
+									<if condition="$status == 3">
+									<th>合成时间</th>
+									</if>
+									<if condition="$status == 1 || $status == 2">
+									<th>上传时间</th>
+									</if>
+									 <th>视频时长</th> <!---->
+									<th>分镜</th>
+									<th>&nbsp;</th>
+								</tr>
+								<tr>
+									<if condition="$status == 3">
+									<td>{$video.tr_time|date='Y-m-d H:m:s',###}</td>
+									</if>
+									<if condition="$status == 1 || $status == 2">
+									<th>{$video.create_time|date='Y-m-d H:m:s',###}</th>
+									</if>
+
+									 <td class="timeLong">{$video.video_long}</td><!-- -->
+									<td>视频 {$video.video_cnt}段</td>
+									<td>音频 {$video.audio_cnt}段</td>
+								</tr>
+							</table>
+						</section>
+						<p id="video_desc_{$video.video_uuid}">{$video.video_desc}</p>
+					</div>
+				</li>
+				</foreach>
+
+
+				</ul>
+				<!----> <div class="pageMark">
+				{$show}
+
+					<!-- <a href="#" class="goHead">首页</a> <a href="#" class="prev">&lt;</a>
+
+
+			</ul>
+			{$show}
+			<!-- <p class="pageMark">
+					<a href="#" class="goHead">首页</a> <a href="#" class="prev">&lt;</a>
+					<a href="#" class="pagers">1</a> <a href="#" class="pagers">2</a> <a
+						href="#" class="pagers">3</a> <a href="#" class="pagers">4</a> <a
+						href="#" class="pagers">5</a> <a href="#" class="pagers">6</a> <a
+						href="#" class="pagers">7</a> <a href="#" class="pagers">8</a> <a
+						href="#" class="pagers">9</a> <a href="#" class="next">&gt;</a> <a
+						href="#" class="goEnd">尾页</a> -->
+				</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+			function dodel(id){
+
+				 $.ajax({
+						type: "GET",
+						url: "__ROOT__/Home/Video/doDel",
+						async: false,
+						data: {id:id},
+						dataType: "json",
+						success:function (data){
+							var obj = eval(data);
+							  if(obj.success){
+								 // alert("删除成功");
+								  $("#" + id).remove();
+							  }else{
+								  alert("删除失败");
+							  }
+						  }
+				});
+
+			}
+
+
+
+			function edit(id){
+				var title = $("#title").val();
+				var desc = $("#desc").val();
+
+				var curr_title = $("#video_title_" + id).html();
+				var curr_desc = $("#video_desc_" + id).html();
+				if((curr_title == title) && (curr_desc == desc)){
+					return;
+				}
+
+
+				 $.ajax({
+						type: "POST",
+						url: "__ROOT__/Home/Video/doedit",
+						async: false,
+						data: {id:id,title:title,desc:desc},
+						dataType: "json",
+						success:function (data){
+							var obj = eval(data);
+							  if(obj.success){
+								 alert(obj.msg);
+								 $("#video_title_" + id).html(title);
+								 $("#video_desc_" + id).html(desc);
+
+							  }else{
+								  alert(obj.msg);
+							  }
+						  }
+					});
+			}
+
+
+		</script>
+
+	<article class="artModel videoDescription">
+		<h1></h1>
+		<p>
+			<strong>标题</strong> <input type="text" class="searchInput" id="title">
+		</p>
+		<p>
+			<strong>描述</strong>
+			<textarea class="searchInput textareas" id="desc"></textarea>
+		</p>
+		<p class="buttonInc">
+			<a href="javascript:;" class="buttons yellowBtn sure"
+				lang="home_desc" video_id="" id="home_submit">确定</a> <a
+				href="javascript:;" class="buttons blackBtn closeBtn">取消</a>
+		</p>
+	</article>
+
+
+
+
+	<article class="artModel videoDelete">
+		<h1>
+			确定要删除<strong></strong>视频？
+		</h1>
+		<p class="buttonInc">
+			<a href="javascript:;" class="buttons yellowBtn sure">确定</a> <a
+				href="javascript:;" class="buttons blackBtn closeBtn">取消</a>
+		</p>
+	</article>
+
+	<article class="artModel videoDown">
+		<h1>
+			<strong></strong>
+		</h1>
+		<p>
+			<strong>视频时常</strong> <em class='timeLong'></em>
+		</p>
+		<p>
+			<strong>实际费用</strong> <em class='price'></em>
+		</p>
+		<p class="buttonInc">
+			<a href="javascript:;" class="buttons yellowBtn sure">使用支付宝支付</a> <a
+				href="javascript:;" class="buttons blackBtn closeBtn">取消</a>
+		</p>
+	</article>
+	<include file="Public/footer" />

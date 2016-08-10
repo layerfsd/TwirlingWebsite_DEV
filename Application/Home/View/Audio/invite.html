@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximun-scale=1,user-scalable=no">
+	<style>	
+	body{
+  		background: url(__PUBLIC__/Home/images/invite.jpg) no-repeat left top;
+  		background-size:100% 100%;
+	}
+	.inv{
+		width:70%;
+		z-index:2;
+		float:left;
+	}
+	.inv_form{
+		width:270px;
+		height:378px;
+		display:block;
+		margin:0 auto;
+		margin-top:180px;
+	}
+	.inv p{
+		position:relative;
+		top:10%;
+		left:20%;
+		display:block;
+	}
+	.inv p input{
+		width:190px;
+		height:20px;
+		display:block;
+		margin:0 auto;
+		box-shadow:none;
+		border:2px solid black;
+		border-radius:3px;
+	}
+	.inv p input:focus{
+		border:2px solid #2C1D84;
+		border-radius:3px;
+	}
+	.inv_s{
+		width:100%;
+		height:40px;
+		display:block;
+		margin:0 auto;
+		margin-left:20%;
+		border-radius:3px;
+		background:#412A8A;
+		font-size:17px;
+		color:#FFFFFF;
+	}
+	.inv_s:hover{
+		border-radius:3px;
+		background:#2C1D84;
+		opacity:1;
+	}
+	label{
+		margin-left:3%;
+		font-size:12px;
+		color:#F5744C;
+	}
+	@media only screen and (min-width:330px){
+		body{
+  		background: url(__PUBLIC__/Home/images/invite.jpg) no-repeat left top;
+  		background-size:100% 100% ;
+	}
+	.inv_form{
+		/*width:375px;*/
+		height:478px;
+		margin-top:250px;
+		margin-left:75px;
+	}
+	.inv_s{
+		width:193px;
+		height:40px;
+		margin-left:8px;
+	}
+	.inv p{
+		position:relative;
+		top:0px;
+		left:4%;
+		display:block;
+	}
+	label{
+		margin-left:3%;
+		font-size:12px;
+		color:#F5744C;
+	}
+}
+	@media only screen and (min-width:400px){
+		.inv_form{
+	/*	width:420px;*/
+		height:478px;
+		margin-top:250px;
+	}
+	.inv_s{
+		width:102%;
+		height:40px;
+		margin-left:26px;
+	}
+	.inv p{
+		position:relative;
+		top:0px;
+		left:12%;
+		display:block;
+	}
+	.inv p input{
+		width:190px;
+		height:25px;
+		display:block;
+		margin:0 auto;
+		box-shadow:none;
+		border:2px solid black;
+		border-radius:3px;
+	}
+	.inv p input:focus{
+		border:2px solid #2D208F;
+		border-radius:3px;
+	 }
+	 label{
+		margin-left:3%;
+		font-size:12px;
+		color:#F5744C;
+		}
+	}
+@media only screen and (min-width: 600px){
+	.vertical{
+		width:750px;
+	}
+	.inv p input{
+		width:370px;
+		height:30px;
+		display:block;
+		margin:0 auto;
+		box-shadow:none;
+		border:2px solid black;
+		border-radius:3px;
+	}
+	.inv_form{
+		width:500px;
+		height:1000px;
+		display:block;
+		margin:0 auto;
+		margin-top:72%;
+	}
+  .inv_s{
+		width:373px;
+		height:55px;
+		display:block;
+		margin:0 auto;
+		font-size:17px;
+		margin-bottom:10px;
+		border-radius:3px;
+		background:#412A8A;
+		font-size:17px;
+		color:#FFFFFF;
+		margin-left:12%;
+	}
+	.inv_s:hover{
+		border-radius:3px;
+		background:#412A8A;
+		opacity:1;
+	}
+	.inv_s:focus{
+		border-radius:3px;
+		background:#412A8A;
+		opacity:1;
+	}
+	label{color:#F5744C;}
+}
+</style>
+<script src="__PUBLIC__/Home/script/jQuery19.js"></script>
+<script src="__PUBLIC__/uploadify/jquery.validate.js"></script>
+	<script>
+		$(function(){  
+    jQuery.validator.addMethod("isTel", function(value,element) {   
+        var mobile = /^(0[0-9]{2,3}\-)?([2-9][0-9]{6,7})(\-[0-9]{1,4})?$|(^(13|15|17|18)\d{9}$)/;    
+        return this.optional(element) || mobile.test(value);   
+    }, "请正确填写您的联系方式"); 
+    jQuery.validator.addMethod("isWechat",function(value,element){
+    	var wechat = /^[a-zA-Z\w_]{5,}$/;
+    	return this.optional(element) || wechat.test(value);
+    },"请输入正确的微信号!")
+	$(".inv").validate({
+		submitHandler:function(form){
+			form.submit();
+		 },
+		rules:{
+			i_company:{required:true},
+			i_name:{required:true},
+			i_duty:{required:true},
+			i_phone:{required:true,
+					isTel:true
+			},
+			i_wechat:{required:true,
+			 		 isWechat:true},
+			i_email:{required:true}
+		},
+		messages:{
+			i_company:{required:'请输入单位名称!'},
+			i_name:{required:'请输入姓名!'},
+			i_duty:{required:'请输入职务!'},
+			i_phone:{required:'请输入您的联系方式!',
+					isTel:'请正确填写您的联系电话!'
+		},
+			i_wechat:{required:'请输入微信号!',
+						isWechat:'请输入正确的微信号!'},
+			i_email:{required:'请输入正确邮箱!'},
+		}
+	})
+
+})
+	</script>
+	<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body>
+	<section class="vertical">
+	
+		<div class="inv_form">
+			<form name="form1" class="inv" id="sale" action="{:U('home/audio/invite_do')}" method="post">
+				<p>
+					<input type="text" name="i_company" class="form-control" placeholder=" 单位名称"></input>
+				</p>
+				<p>
+					<input type="text" name="i_name" class="form-control" placeholder=" 嘉宾姓名"></input>
+				</p>
+				<p>
+					<input type="text" name="i_duty" class="form-control" placeholder=" 嘉宾职务"></input>
+				</p>
+				<p>
+					<input type="text" name="i_phone" class="form-control" placeholder=" 联系电话" ></input>
+				</p>
+				<p>
+					<input type="text" name="i_wechat" class="form-control" placeholder=" 微信号"></input>
+				</p>
+				<p>
+					<input type="text" name="i_email" class="form-control" placeholder=" 电子邮箱"></input>
+				</p>
+				<button type="submit" class="inv_s" >提交</button>
+			</form>
+		</div>
+	</section>	
+	<script>
+	
+	wx.config({
+          //debug: true,
+          debug: false,
+          appId: "<?php echo $signPackage["appId"]; ?>",
+          timestamp: <?php echo $signPackage["timestamp"]; ?>,
+          nonceStr: "<?php echo $signPackage["nonceStr"]; ?>",
+          signature: "<?php echo $signPackage["signature"]; ?>",
+          jsApiList: [
+              "onMenuShareTimeline",
+              "onMenuShareAppMessage",
+              "onMenuShareQQ",
+              "onMenuShareWeibo"
+          ]// 所有要调用的 API 都要加到这个列表中
+      });
+
+
+
+      wx.ready(function() {
+          var shareData = {
+              title: '时代拓灵线上发布会',
+              desc: '时代拓灵线上发布会“声画合璧——下一站沉浸式”邀请函及报名通道',
+              link: 'http://<?php echo C("WEB_HOST")?>/index.php/home/audio/invite.html',
+              imgUrl: 'http://<?php echo C("WEB_HOST")?>/Public/Home/images/sss.jpg'
+          };
+          wx.onMenuShareAppMessage(shareData);
+          wx.onMenuShareTimeline(shareData);
+          wx.onMenuShareQQ(shareData);
+          wx.onMenuShareWeibo(shareData);
+      });
+      wx.error(function(res) {
+          console.log(res.errMsg);
+      });
+
+	</script>
+</body>
+</html>

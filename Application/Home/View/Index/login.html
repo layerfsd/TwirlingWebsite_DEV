@@ -1,0 +1,135 @@
+<include file="Public/header" />
+
+<div class="subpageBody">
+    <div class="inc">
+        <h1 class="pageName">用户登录</h1>
+        <aside class="pageAside">
+            <hr class="pageHr">
+            <form id="form1" name="form1" action="{:U('home/do/login')}" method="post">
+            <article class="form">
+                <div class="formParam">
+                    <h2>手机号码<a href='reg.html'>新用户注册</a></h2>
+                    <p>
+                        <input name="mobile" type="text"  class="userInput" />
+                    </p>
+                </div>
+                <div class="formParam">
+                    <h2>密 码<a href='lost.html'>忘记密码？</a></h2>
+                    <p>
+                        <input name="user_pwd" type="password"  class="userInput" />
+                    </p>
+                </div>
+
+                <div class="formParam remember">
+                    <!--
+                    <label><input type="checkBox"  class="cBox">记住我</label>
+                    -->
+                </div>
+
+                <div class="formParam">
+                    <button type="button" class="loginBtn">登 陆<button>
+                </div>
+                <div class="formParam error">
+                    <strong>×</strong><span>帐号密码错误</span>
+                </div>
+            </article>
+            </form>
+        </aside>
+
+        <aside class="AsideRight">
+            <h2>用第三方直接登录</h2>
+            <p class="thirdWay">
+                <!--<span id="qqLoginBtn"></span>-->
+                <span id="wechat"><a  href="{:U('/Home/weixin')}" class="wechat">使用微信登陸</a></span>
+                <span id="weibo"><a  href="#" ></a></span>
+                <input type="hidden" id="huoqu" value="获取"/>
+            </p>
+        </aside>
+
+    </div>
+</div>
+
+<include file="Public/footer" />
+
+
+
+<script>
+	//移动端不显示微信
+	$(function(){
+		if($(window).width()< 600)
+		{
+			$('#wechat').hide();
+		}
+	});
+
+    //表单提交
+    $(".loginBtn").click(function(){
+        $("#form1").submit();
+    });
+
+    QC.Login({
+                //btnId：插入按钮的节点id，必选
+                btnId:"qqLoginBtn",
+                //用户需要确认的scope授权项，可选，默认all
+                scope:"all",
+                //按钮尺寸，可用值[A_XL| A_L| A_M| A_S|  B_M| B_S| C_S]，可选，默认B_S
+                size: "A_L"
+            }, function(reqData, opts) {
+                    //处理登录流程
+                QC.Login.getMe(function(openId){
+                    //alert(openId);
+                    //alert(reqData.nickname);
+                    //alert(reqData.figureurl);
+                    var nickname = reqData.nickname;
+                    $.post(
+                            "{:U('home/qq/qqlogin')}",
+                            { openId: openId, nickname:nickname },
+                            function (r) {
+                                //alert(111);
+                                //跳轉到完善手機頁面
+                                window.location.href="{:U('home/user/bindphone')}";
+
+
+                            },'text'
+                    );
+                });
+                $("#qqLoginBtn").html('<img src="'+reqData.figureurl+'" /> '+reqData.nickname+' <a href="javascript:QC.Login.signOut();" rel="external nofollow" >退出</a>');
+            }
+    );
+
+
+    /*
+    $("#huoqu").click(function(){
+
+        //从页面收集OpenAPI必要的参数。get_user_info不需要输入参数，因此paras中没有参数
+        var paras = {};
+
+        //用JS SDK调用OpenAPI
+        QC.api("get_user_info", paras)
+            //指定接口访问成功的接收函数，s为成功返回Response对象
+                .success(function(s){
+                    //成功回调，通过s.data获取OpenAPI的返回数据
+                    alert("获取用户信息成功！当前用户昵称为："+s.data.nickname);
+                })
+            //指定接口访问失败的接收函数，f为失败返回Response对象
+                .error(function(f){
+                    //失败回调
+                    alert("获取用户信息失败！");
+                })
+            //指定接口完成请求后的接收函数，c为完成请求返回Response对象
+                .complete(function(c){
+                    //完成请求回调
+                    alert("获取用户信息完成！");
+                });
+
+
+            alert(QC.Login.check());
+            QC.Login.getMe(function(openId, accessToken){
+            alert(["当前登录用户的", "openId为："+openId, "accessToken为："+accessToken].join("\n"));
+        });
+    });
+    */
+
+
+
+</script>

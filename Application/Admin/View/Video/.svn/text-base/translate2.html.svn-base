@@ -1,0 +1,48 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+
+<link rel="stylesheet" type="text/css"
+	href="__PUBLIC__/plupload-2.1.2/css/style.css" />
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+<form action="__ROOT__/Admin/Video/doTranslate" method="post" id="myPost">
+	<input type="hidden" value="{$uuid}" name="uuid" id="uuid" >
+	<input type="hidden" value="{$time}" name="time" id="time">
+	<h4>您所选择的文件列表：</h4>
+	<div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
+
+	<br />
+
+	<div id="container">
+		<a id="selectfiles" href="javascript:void(0);" class='btn'>选择文件</a> <a
+			id="postfiles" href="javascript:void(0);" class='btn'>开始上传</a>
+	</div>
+
+	<pre id="console"></pre>
+
+</br>
+</br>	
+</br>
+	<div id="video" style="display: ">
+	
+	</div>
+</br>
+</br>	
+</br>	
+</br>			
+<button type="button" onClick="isPost();">确定合成</button>
+</form>
+
+	<script type="text/javascript"
+		src="__PUBLIC__/plupload-2.1.2/js/plupload.full.min.js"></script>
+	<script type="text/javascript"
+		src="__PUBLIC__/plupload-2.1.2/js/upload_translate.js"></script>
+	<include file="Public/footer" />
+</block>
+
+
+

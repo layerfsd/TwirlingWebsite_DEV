@@ -1,0 +1,92 @@
+<include file="Public/header" />
+<body>
+		<div class="userPageTitle">
+			<div class="inc">
+				<h1 class="pageName">视频管理</h1>
+			</div>
+			<div class="pageTitleBg"></div>
+		</div>
+		<div class="userPageContent inc videoOverList">
+			<p class="createVideo">
+				<a href="__ROOT__/Home/Video/goAdd"> 创建分镜头合成任务<span></span>
+				</a>
+			</p>
+			<p class="tabNav">
+				<a href="__ROOT__/Home/Video/golist?status=3" <if condition="$status == 3">class="label"</if>>已合成</a>
+				<a href="__ROOT__/Home/Video/golist?status=2" <if condition="$status == 2">class="label"</if>>合成中</a>
+				<!-- <a href="__ROOT__/Home/Video/golist?status=1" <if condition="$status == 1">class="label"</if>>已上传</a> -->
+			</p>
+			
+			
+			
+			<div class="ulList">
+				<ul>
+				<foreach name="list" item="video">
+					<li>
+					<figure>
+			            <video width="260" height="146" src="{$video.aliyun_url}" controls="controls" >
+			          </figure>
+						<div class="videoDes">
+							<h3>
+								<span>{$video.video_title}</span> <em> 
+								<if  condition="$status == 3">
+									<i class="price">￥&nbsp;{$video.order_info.order_money}</i> 
+									<a class='down' href="{$video.tr_url}"><span></span>下载</a> <a
+									class='edit' href="javascript:;"><span></span>编辑</a> <a
+									class='delete' href="javascript:;"><span></span>删除</a>
+								</if>
+								</em>
+							</h3>
+							<section>
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+									<if  condition="$status == 3">
+											<th>合成时间</th>
+									</if>
+									<if  condition="$status == 1 || $status == 2">
+											<th>上传时间</th>
+									</if>
+										<!-- <th>视频时长</th> -->
+										<th>分镜</th>
+										<th>&nbsp;</th>
+									</tr>
+									<tr>
+										<if  condition="$status == 3">
+											<td>{$video.tr_time|date='Y-m-d H:m:s',###}</td>
+										</if>
+										<if  condition="$status == 1 || $status == 2">
+											<th>{$video.create_time|date='Y-m-d H:m:s',###}</th>
+									</if>
+										
+										<!-- <td class="timeLong">300小时26分钟 26秒</td> -->
+										<td>视频 {$video.video_cnt}段</td>
+										<td>音频 {$video.audio_cnt}段</td>
+									</tr>
+								</table>
+							</section>
+							<p>
+								{$video.video_desc}
+							</p>
+						</div>
+					</li>
+				</foreach>
+					
+					
+				</ul>
+				{$show}
+				<!-- <p class="pageMark">
+					<a href="#" class="goHead">首页</a> <a href="#" class="prev">&lt;</a>
+					<a href="#" class="pagers">1</a> <a href="#" class="pagers">2</a> <a
+						href="#" class="pagers">3</a> <a href="#" class="pagers">4</a> <a
+						href="#" class="pagers">5</a> <a href="#" class="pagers">6</a> <a
+						href="#" class="pagers">7</a> <a href="#" class="pagers">8</a> <a
+						href="#" class="pagers">9</a> <a href="#" class="next">&gt;</a> <a
+						href="#" class="goEnd">尾页</a>
+				</p> -->
+			</div>
+			
+			
+			
+			
+		</div>
+	<include file="Public/footer" />

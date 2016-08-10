@@ -1,0 +1,146 @@
+<include file="Public/header" />
+
+<div class="userPageTitle">
+    <div class="inc">
+        <div class="userMsg">
+            <p class="person">
+                关于我们
+            </p>
+        </div>
+    </div>
+    <div class="pageTitleBg"></div>
+</div>
+<div class="userPageContent inc ">
+  <h2 class='aboutWords'>
+    北京时代拓灵有限公司是一家专注于虚拟现实(Virtual Reality)软件和硬件服务的高科技创业公司。拓灵公司创立于2015年5月，创始成员全部由海外归国人员组成。
+  </h2>
+  <article class='aboutContent'>
+    <h3 class='pageH3'>
+      <em class='bigSize'>
+        业务咨询
+      </em>
+      <span>
+        投资
+      </span>
+      <span>
+        合作
+      </span>
+      <span>
+        求职
+      </span>
+    </h3>
+    <div class='contentTab'>
+      <form id="form1" name="form1" action="{:U('home/do/contact_new')}" method="post">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td>
+              <input id="name" name="name" type="text" placeholder='名字' class='aboutText'>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input id="email" name="email" type="text" placeholder='邮箱' class='aboutText'>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <select name="type" id="type"  class='aboutSelect'>
+                <option value="">-类型-</option>
+                <option value="投资">投资</option>
+                <option value="合作">合作</option>
+                <option value="求职">求职</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <textarea name="content" id="content" cols="30" rows="10" class='aboutTextarea' placeholder='请输入信息'></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td class='aboutButtonInc'>
+              <button id='sub' type='button' class='submitBtn'>提交</button>
+              <button type='reset' class='resetBtn'>重置</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </article>
+  <article class='aboutContent career'>
+    <h3 class='pageH3'>
+      <em>
+        招聘信息
+      </em>
+    </h3>
+    <div class='contentTab '>
+      <h3>
+        音频工程师
+      </h3>
+      <dl>
+        <dd>
+          深厚的数理基础，精通信号处理理论
+        </dd>
+        <dd>
+          熟悉spatial audio 算法
+        </dd>
+        <dd>
+          丰富的编程经历，熟悉C/C++，和脚本语言如Matlab，Python等
+        </dd>
+      </dl>
+      <dl>
+        <dt>
+          如果有以下经验则更佳：
+        </dt>
+        <dd>熟悉audio coding， 尤其是multichannel audio compression</dd>
+        <dd>算法效率，实时性优化</dd>
+        <dd>移动端开发</dd>
+      </dl>
+    </div>
+    <div class='contentTab'>
+      <h3>
+        计算机视觉，视频图像处理工程师
+      </h3>
+      <dl></dd>
+        <dd>深厚的数理基础，精通信号处理理论</dd>
+        <dd>熟悉常用图像视频处理算法，如特征提取，Graphcut，Optical flow等</dd>
+        <dd>丰富的编程经历，熟悉C/C++，和脚本语言如Matlab，Python等</dd>
+      </dl>
+      <dl>
+        <dt>
+          如果有以下经验则更佳：
+        </dt>
+        <dd>熟悉视频编解码</dd>
+        <dd>熟悉视频图像拼接</dd>
+        <dd>熟悉立体视觉，3D视频处理相关算法</dd>
+        <dd>算法效率，实时性优化</dd>
+        <dd>移动端开发</dd>
+      </dl>
+    </div>
+    <h2>请发简历至 <a href="mailto:hr@twirlingvr.com">hr@twirlingvr.com</a></h2>
+  </article>
+</div>
+
+<script>
+$('#sub').click(function(){
+    if($('#name').val() == ''){
+        alert('请填写名字');
+        return false;
+    }
+    if($('#email').val() == ''){
+        alert('请填写邮箱');
+        return false;
+    }
+	if($('#type').val() == ''){
+        alert('请选择类型');
+        return false;
+    }
+    if($('#content').val() == ''){
+        alert('请填写内容');
+        return false;
+    }
+    $('#form1').submit();
+});
+</script>
+
+<include file="Public/footer" />

@@ -1,0 +1,45 @@
+<include file="Public/header" />
+<div class="userPageTitle">
+    <div class="inc">
+        <div class="userMsg">
+            <p class="person">
+                全景视频
+            </p>
+        </div>
+    </div>
+    <div class="pageTitleBg"></div>
+</div>
+<div class="userPageContent detailPage">
+    <div class="inc videoList">
+      <?php foreach($list as $k=>$v):?>
+      <figure>
+        <a href="/vr_demo_php/vr.php?video_uuid=<?php echo $v['video_uuid']?>" target="_black">
+          <p>
+            <img class="img1" src="<?php echo $v['pic_url']?>"/>
+          </p>
+          <figcaption>
+            <?php echo $v['video_title']?>
+          </figcaption>
+        </a>
+      </figure>
+      <?php endforeach;?>
+    </div>
+</div>
+<include file="Public/footer" />
+<script>
+$(function(){
+$('.img_body').each(function(index,value){
+   	 $('.img_body').eq(index).hover(function(){
+        $(value).removeClass('img_body').addClass('img_body_h');
+         },function(){
+        $(value).addClass('img_body').removeClass('img_body_h');
+        })
+    });
+
+$('.img_body').hover(function(){
+    $(this).find('.title_style').css({color:'#FF3E00'});
+},function(){
+    $(this).find('.title_style').css({color:'black'});
+    })
+})
+</script>

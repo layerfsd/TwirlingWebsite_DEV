@@ -1,0 +1,133 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+
+
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<form action="__ROOT__/Admin/Config/add" method="post" id="myPost">
+<div id="main">
+	<div class="mainInc">
+		<div class="mainIncA">
+			<div class="mainIncB">
+				<div class="pageInfo">
+					<h1>邮箱设置</h1>
+					<p id="getBack">
+						<button>
+							<span></span>返回
+						</button>
+					</p>
+				</div>
+				
+				<div class="msgContent">
+                                <h3 class="tableTitle" onclick="add()">添加管理员收信邮箱(点击标题添加)</h3>
+                                <div class="msgTable">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="tab">
+									<foreach name="list" item="mail">                                    
+										<tr id="{$mail.id}">
+											<th width="4%" >邮箱帐号</th>
+											<td width="43%" id="ossfile"><p lang="" class="formTexter "> <q class="radioInput">
+											<input type="text" name="to_mail_name[]" value="{$mail.config_val}"></q> <a href="javascript:del('{$mail.id}');">删除</a></p></td>
+										</tr>
+									</foreach>
+                                    </table>
+                                </div>
+                            
+                           
+                        </div>
+				
+				<div class="msgContent">
+						<h3 class="tableTitle">修改管理员发信邮箱</h3>
+						<div class="msgTable">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0" id="">
+								<tr>
+									<th width="4%" >邮箱帐号</th>
+									<td width="43%" ><p lang="" class="formTexter "> <q class="radioInput">
+									<input type="text" name="send_mail_name" id="mail_name" value="{$mail_arr.send_mail_name}"></q> </p></td>
+								</tr>
+								<tr>
+									<th width="4%" >邮箱密码</th>
+									<td width="43%" ><p lang="" class="formTexter "> <q class="radioInput">
+									<input type="text" name="send_mail_pwd" id="pwd" value="{$mail_arr.send_mail_pwd}"></q> </p>
+									</td>
+								</tr>
+								<tr>
+									<th width="4%" >外部SMTP服务器地址</th>
+									<td width="43%" >
+									<p lang="" class="formTexter "> <q class="radioInput">
+									<input type="text" name="send_mail_host" id="host" value="{$mail_arr.send_mail_host}"></q> </p>
+									</td>
+								</tr>
+								<tr>
+									<th width="4%" >外部SMTP服务器端口</th>
+									<td width="43%" id="ossfile"><p lang="" class="formTexter "> <q class="radioInput">
+									<input type="text" name="send_mail_port" id="port" value="{$mail_arr.send_mail_port}"></q></p>
+									</td>
+								</tr>
+							</table>
+						</div>
+				</div>
+				<div class="msgContent">
+						 <p class="tabelBtn">
+							<button type="button" class="modelSubmit "  onClick="isPost();">确认</button>
+				</p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+
+<script type="text/javascript">
+
+function isPost(){
+	
+	var obj = $("input[name='to_mail_name[]']");
+	var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	for(var i = 0 ; i < obj.length; i ++){
+		var curr_val = $(obj).val();
+		if(!myreg.test(curr_val))
+	    {
+	         alert('提示\n\n请输入有效的E_mail！');
+	        return false;
+	   }	
+	}
+	$("#myPost").submit();
+	
+}
+
+
+
+ function add(){
+	 var id = generateMixed();
+	 $("#tab").append('<tr id="'+id+'"> <th width="4%" >邮箱帐号</th><td width="43%" id="ossfile"><p lang="" class="formTexter "> <q class="radioInput"><input type="text" name="to_mail_name[]" value=""><a href="javascript:del(\''+id+'\');">删除</a></q> </p></td></tr>');
+	 
+ }
+ 
+ 
+ function del(obj){
+	$("#" + obj).remove();
+ }
+ 
+ var chars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+ function generateMixed() {
+      var res = "";
+      for(var i = 0; i < 10 ; i ++) {
+          var id = Math.ceil(Math.random()*35);
+          res += chars[id];
+      }
+      return res;
+ }
+  
+ 
+ 
+ function testMail(){
+	 
+ }
+ 
+</script>
+
+</block>

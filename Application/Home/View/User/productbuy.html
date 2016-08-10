@@ -1,0 +1,45 @@
+<include file="Public/header" />
+
+<div class="subpageBody">
+    <div class="inc">
+        <h1 class="pageName">确认订单</h1>
+        <form id="form1" name="form1" action="{:U('home/alipay/doalipay')}" method="post">
+            <aside class="pageAside">
+                <hr class="pageHr">
+
+                    <article class="form">
+                    <div class="formParam">
+                        产品名称：{$ordername}<br/>
+                        价格：{$price}<br/>
+						收货地址：{$address}<br/>
+						手机号：{$address_mobile}
+                    </div>
+
+                    <div class="formParam">
+                        <input type="hidden" name="WIDout_trade_no" value="{$order_no}" />
+                        <input type="hidden" name="WIDsubject" value="{$ordername}" />
+                        <input type="hidden" name="WIDtotal_fee" value="{$price}" />
+                        <input type="hidden" name="WIDbody" value="{$ordername}" />
+                        <input type="hidden" name="WIDshow_url" value="" />
+                        <button type="button" class="loginBtn">确认并且付款</button>
+                    </div>
+
+                </article>
+
+            </aside>
+        </form>
+    </div>
+</div>
+
+<include file="Public/footer" />
+
+
+
+<script>
+
+    //表单提交
+    $(".loginBtn").click(function(){
+        $("#form1").submit();
+    });
+
+</script>

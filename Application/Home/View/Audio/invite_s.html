@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+<title>时代拓灵线上发布会</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximun-scale=1,user-scalable=no">
+	<style>
+	body{
+  		background: url(__PUBLIC__/Home/images/invite_s.jpg) no-repeat left;
+  		background-size:100% 100%;
+	}
+	.inv_header{
+		margin:0 auto;
+		width:306px;
+		height:200px;
+		margin-bottom:120%;
+	}	
+	.s_name{
+		/*margin:0 auto;*/
+		text-align:center;
+	   	position:relative;
+		top:142%;
+		left:0px;
+		width:100%;
+		height:30%;
+		font-family:'楷体';
+		font-size:58.33px;
+		color:#ffffff;
+	}
+	.inv{
+		margin:0 auto;
+		margin-top:445px;
+		width:22%;
+		background:#DB1312;
+		border:2px solid #DB1312;
+		border-radius:3px;
+		display:block;
+		font-size:16px;
+		font-family:"微软雅黑";
+		color:white;
+		text-decoration:none;
+	}
+@media only screen and (min-width: 330px){
+	.inv_header{
+		margin:0 auto;
+		width:306px;
+		height:200px;
+		margin-bottom:130%;
+	}	
+	.s_name{
+		width:100%;
+		margin:0 auto;
+	   	position:relative;
+		top:172%;
+		left:0px;
+	}
+	.inv{
+		display:block;
+		margin:0 auto;
+		position:relative;
+		top:536px;
+		left:0px;
+		text-align:center;
+	}
+}	
+@media only screen and (min-width: 400px){
+	.inv_header{
+		margin-bottom:140%;
+	}	
+	.s_name{
+		margin:0 auto;
+		width:100%;
+	   	position:relative;
+		top:202%;
+		left:0px;
+	}
+	.inv{
+		display:block;
+		margin:0 auto;
+		position:relative;
+		top:615px;
+		left:0px;
+		text-align:center;
+	}
+
+}
+@media only screen and (min-width: 600px){
+	.inv_header{
+		width:700px;
+		height:500px;
+		margin:0 auto;
+		margin-bottom:50px;
+	}
+}
+</style>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+</head>
+<body>
+	<section class="vertical">
+		<article class="inv_header">
+			<div class="s_name"><?php echo $_GET['name']?></div>
+		<!-- <input type="text" class="s_name"></input>
+		</article> -->
+		<a class="inv" href="{:U('home/audio/invite')}">报名通道</a>			
+	</section>	
+	
+	<script>
+	
+	wx.config({
+          //debug: true,
+          debug: false,
+          appId: "<?php echo $signPackage["appId"]; ?>",
+          timestamp: <?php echo $signPackage["timestamp"]; ?>,
+          nonceStr: "<?php echo $signPackage["nonceStr"]; ?>",
+          signature: "<?php echo $signPackage["signature"]; ?>",
+          jsApiList: [
+              "onMenuShareTimeline",
+              "onMenuShareAppMessage",
+              "onMenuShareQQ",
+              "onMenuShareWeibo"
+          ]// 所有要调用的 API 都要加到这个列表中
+      });
+
+
+
+      wx.ready(function() {
+          var shareData = {
+              title: '时代拓灵线上发布会',
+              desc: '时代拓灵线上发布会“声画合璧——下一站沉浸式”邀请函及报名通道',
+              link: 'http://<?php echo C("WEB_HOST")?>/index.php/home/audio/invite_s.html?name=<?php echo $_GET['name']?>',
+              imgUrl: 'http://<?php echo C("WEB_HOST")?>/Public/Home/images/sss.jpg'
+          };
+          wx.onMenuShareAppMessage(shareData);
+          wx.onMenuShareTimeline(shareData);
+          wx.onMenuShareQQ(shareData);
+          wx.onMenuShareWeibo(shareData);
+      });
+      wx.error(function(res) {
+          console.log(res.errMsg);
+      });
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+
+
+
+
+<div id="main">
+	<div class="mainInc">
+		<div class="mainIncA">
+			<div class="mainIncB">
+				<div class="pageInfo">
+					<h1>用户管理中心</h1>
+				</div>
+				
+				<form action="__ROOT__/Admin/User/index" method="get">
+				<div class="searchCondition">
+					<span> 
+						<strong>用户名</strong> 
+						<input type="text" placeholder="请输入手机号" class="texter" name="search" value="{$search}" />
+					</span> 
+					<span> 
+					<strong>状态</strong> 
+						<select name="status">
+							<option value="1" <if condition="$status == 1">selected</if>>正常</option>
+							<option value="0" <if condition="$status == 0">selected</if>>已删除</option>
+							<option value="-1" <if condition="$status == -1">selected</if>>全部</option>
+						</select>
+					</span>
+					<strong>资质审核状态</strong> 
+						<select name="zizhi_status">
+							<option value="0" <if condition="$zizhi_status == 0">selected</if>>未上传</option>
+							<option value="1" <if condition="$zizhi_status == 1">selected</if>>待审核</option>
+							<option value="2" <if condition="$zizhi_status == 2">selected</if>>已通过</option>
+						</select>
+					</span>
+					<button type="submit">
+						<span class="search">&nbsp;</span>搜 索
+					</button>
+					<button type="reset">
+						<span class="reset">&nbsp;</span>重 置
+					</button>
+				</div>
+				</form>
+				<div class="msgContent">
+					<div class="listTable">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<!-- <th><input type="checkbox" title="全选" /></th> -->
+									<td>序号</td>
+									<td>手机号</td>
+									<td>电子邮箱</td>
+									<td>创建时间</td>
+                                    <td>来源</td>
+									<td>状态</td>
+									<td>操作</td>
+								</tr>
+							</thead>
+							<tbody>
+
+								<foreach name="list" item="users">
+								<tr>
+									<!-- <th><input type="checkbox" title="选择" /></th> -->
+									<td>{$users.id}</td>
+									<td>
+
+                                       {$users.mobile}
+
+
+
+                                    </td>
+									<td>{$users.email}</td>
+									<td>{$users.create_time|date='Y-m-d',###}</td>
+
+                                    <td>
+                                        <if condition="$users.register_type == 0">本站注册</if>
+                                        <if condition="$users.register_type == 1">QQ注册</if>
+                                        <if condition="$users.register_type == 2">微信注册</if>
+                                        <if condition="$users.register_type == 3">微博注册</if>
+                                    </td>
+
+
+									<td><if condition="$users.status == 1">正常</if> <if
+											condition="$users.status == 0">删除</if></td>
+									<td>
+										<input name="operate" type="button" class="buttoner"
+										value="查看详情" onClick="goDatile({$users.id})">
+										<input name="operate" type="button" class="buttoner"
+										value="禁用" onClick="doUpdateStatus();">
+									</td>
+								</tr>
+								</foreach>
+							</tbody>
+						</table>
+					</div>
+					<div class="tools">
+						<div class="pageMark">
+							{$show}
+							<!-- <button class="back">&lt;</button>
+							<input type="text" class="num" size="3" value="5" /><span>/10</span>
+							<button class="sure">Go</button>
+							<button class="forward">&gt;</button> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	/* function goDatile(id) {
+		$.ajax({
+			type : "GET",
+			url : "",
+			data : {
+				id : id
+			},
+			dataType : "json",
+			success : function(data) {
+				alert(data);
+			}
+		});
+	} */
+	function doUpdateStatus(type , id , user_id){
+		 var content = "";
+		//正常
+		if(type == 1){
+			content = "确定启用账户吗?";
+		}else{
+			content = "账户禁用后将不可登陆！确定禁用账户吗?";
+		}
+		/*var model = $(".videoDescription");
+		art.dialog({
+		      title: "消息提示",
+		      content:content,
+		      lock:true,
+		      id:'description',
+		      button: [{
+		        name: '关闭'
+		      }]
+		    }); */
+		
+		
+		
+		if(window.confirm(content)){
+			 $.ajax({
+					type: "GET",
+					url: "__ROOT__/Admin/User/doUpdateStatus",
+					async: false,
+					data: {type:1, val:theValue,id:user_id},
+					dataType: "json",
+					success:function (data){
+						  if(!data.success){
+							  
+						  }else{
+						  }
+					  }
+				});
+			
+         }else{
+            //alert("取消");
+            return false;
+        }
+
+
+
+	}
+	
+	
+	function goDatile(id){
+		var url = "__ROOT__/Admin/User/datile?id=" + id;
+		window.location.href=url; 
+	}
+	
+	
+</script>
+</block>

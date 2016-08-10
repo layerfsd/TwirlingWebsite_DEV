@@ -1,0 +1,17 @@
+Public/
+ThinkPHP/Library/
+Application/Runtime/
+plugin/
+Application/Home_bak/
+ThinkPHP/
+viewer/
+vr_demo_php_old/videos/film1.mp4
+vr_demo_php_old/videos/film1.webm
+vr_demo_php_old/videos/film1_poster.jpg
+vr_demo_php_old/videos/film1_small.mp3
+vr_demo_php_old/videos/film1_small.mp4
+vr_demo_php_old/videos/film1_small.webm
+.idea/
+settings_ide.jar
+pay.log
+thenewlog.log

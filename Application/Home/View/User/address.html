@@ -1,0 +1,46 @@
+<include file="Public/header" />
+
+<div class="subpageBody">
+    <div class="inc">
+        <h1 class="pageName">确认收货地址</h1>
+        <form id="form1" name="form1" action="{:U('home/user/productbuy')}" method="post">
+            <aside class="pageAside">
+                <hr class="pageHr">
+
+                    <article class="form">
+                    <div class="formParam">
+                        产品名称：{$ordername}<br/>
+                        价格：{$price}
+                    </div>
+					<div class="formParam">
+                        收货地址:
+						<br><textarea cols=50 name="address"></textarea>
+						手机号:
+						<br><input type="text" name="address_mobile" value="" />
+                    </div>
+
+                    <div class="formParam">
+						<input type="hidden" name="ordername" value="{$ordername}" />
+						<input type="hidden" name="price" value="{$price}" />
+                        <button type="button" class="loginBtn">确认</button>
+                    </div>
+
+                </article>
+
+            </aside>
+        </form>
+    </div>
+</div>
+
+<include file="Public/footer" />
+
+
+
+<script>
+
+    //表单提交
+    $(".loginBtn").click(function(){
+        $("#form1").submit();
+    });
+
+</script>

@@ -1,0 +1,200 @@
+ 
+<extend name="Public/base"/>
+<block name="body">
+ <include file="Public:left" />
+ 
+
+
+
+	<div id="main">
+            <div class="mainInc" >
+                <div class="mainIncA">
+                    <div class="mainIncB">
+                    	<div class="pageInfo">
+                        	<h1>
+                            	通知
+                            </h1>
+                            <div class="pageTab">
+                            	<a href="#" class="label" title="全部消息" >全部消息</a>
+								<a href="#" title="未读消息">未读消息</a>
+                            </div>
+                            <p id="getBack">
+                            	<button><span></span>返回</button>
+                            </p>
+                        </div>
+                        <div class="msgContent">
+                        	<form>
+                                <h3 class="tableTitle">区域标题</h3>
+                                <div class="msgTable">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <th width="14%"><strong>*</strong>漫游</th>
+                                                <td width="43%">
+                                                    <p class="formTexter" lang="">
+                                                        <q class="radioInput"><input type="text" value="121212"  onfocus="" /></q>
+                                                    </p>
+                                                    <p class="description">请输入3-8个文字</p>
+                                                </td>
+                                                <td width="43%"><p class="validator"></p></td>
+                                            </tr>
+                                          
+                                             <tr>
+                                                <th><strong>*</strong>漫游</th>
+                                                <td>
+                                                    <p class="formTexter" lang="">
+                                                        <q class="radioInput"><input type="radio" name="area" value="roam" checked="checked" class="sellectInput" /><input type="text" /></q>
+                                                    </p>
+                                                    <p class="description">请输入3-8个文字</p>
+                                                </td>
+                                                <td ><p class="validator"></p></td>
+                                            </tr>
+                                            <tr>
+                                                <th><strong>*</strong>非漫游</th>
+                                                <td>
+                                                  <p class="formTexter" >
+                                                        <input type="text" /><button type="button" class="formButton">按钮A</button>
+                                                  </p>
+                                                  <p class="description">选择OVS</p>
+                                                </td>
+                                                <td ><p class="validator"></p></td>
+                                            </tr>
+                                            <tr>
+                                                <th><strong>*</strong>非漫游</th>
+                                                <td>
+                                                  <p class="formTexter" lang="dosth"  >
+                                                        <input type="text" /><span class="unit">单位：秒</span>
+                                                  </p>
+                                                  <p class="description">选择OVS</p>
+                                                </td>
+                                                <td ><p class="validator"></p></td>
+                                            </tr>
+                                            <tr>
+                                            <th><strong>*</strong>非漫游</th>
+                                            <td>
+                                              <p class="formTexter" >
+                                                    <q class="radioInput"><input type="radio" name="area" value="unRoam" class="sellectInput" />
+                                                    <select name="name">
+                                                        <option value="">-请选择-</option>
+                                                        <option value="请选择" >请选择</option>
+                                                    </select>
+                                                    </q>
+                                              </p>
+                                              <p class="description">选择OVS</p>
+                                            </td>
+                                            <td ><p class="validator"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <th>黑名单</th>
+                                            <td>
+                                                <div class="inputList" lang="max:15">
+                                                    <p class="formTexter">
+                                                        <input type="text" /><a href="#" class="plusInput">增加</a><a href="#" class="delInput">删除</a>
+                                                    </p>
+                                                </div>
+                                              <p class="description">选择OVS</p>
+                                            </td>
+                                            <td ><p class="validator"></p></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                               <p class="tabelBtn">
+                                    <button type="button" class="modelSubmit submitor" lang="myFn">提 交</button>
+                                    <button type="reset">重 置</button>
+                                </p>
+                            </form>
+                        </div>
+                        <div class="msgContent">
+                        	<form>
+                                <h3 class="tableTitle">区域标题</h3>
+                                <div class="msgTable">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                             <tr>
+                                                <th width="14%"><strong>*</strong>nodeId</th>
+                                                <td width="43%" class="checkFun validatorsa" lang="nodeId">
+                                                    <p class="formTexter" lang="">
+                                                    <select name="vo.nodeId">
+                                                        <option value="">-请选择-</option>
+                                                        <option value="请选择" >请选择</option>
+                                                    </select>
+                                                    </p>
+                                                </td>
+                                                <td  width="43%" ><p class="validator"></p></td>
+                                            </tr>
+                                            <tr>
+                                            <th><strong>*</strong>ovsName</th>
+                                            <td class="checkFun" lang="ovsName">
+                                                <p class="formTexter" lang=""><input type="text" value="" name="请选择"/></p>
+                                                <p class="description">请输入3-8个文字</p>
+                                            </td>
+                                            <td ><p class="validator"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <th><strong>*</strong>ovsIp</th>
+                                            <td class="checkFun" lang="ovsIp">
+                                                <p class="formTexter" lang=""><input type="text" value="" name="请选择"/></p>
+                                                <p class="description">请输入3-8个文字</p>
+                                            </td>
+                                            <td ><p class="validator"></p></td>
+                                        </tr>
+                                        </table>
+                                </div>
+                                <p class="tabelBtn">
+                                    <button type="button" class="modelSubmit submitor" lang="myFn">提 交</button>
+                                    <button type="reset">重 置</button>
+                                </p>	
+                            </form>
+                        </div>
+                        <div class="msgContent">
+                        	<form>
+                            	<h3 class="tableTitle">区域标题</h3>
+                                <div class="msgTable">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                             <tr>
+                                                <th  width="14%"><strong>*</strong>nodeId</th>
+                                                <td width="43%" class="checkFun validatorsa" lang="nodeId">
+                                                    <p class="formTexter" lang="">
+                                                    <select name="vo.nodeId">
+                                                        <option value="">-请选择-</option>
+                                                        <option value="请选择" >请选择</option>
+                                                    </select>
+                                                    </p>
+                                                </td   >
+                                                                            <td  width="43%" ><p class="validator"></p></td>
+                                            </tr>
+                                            <tr>
+                                            <th><strong>*</strong>ovsName</th>
+                                            <td class="checkFun" lang="ovsName">
+                                                <p class="formTexter" lang=""><input type="text" value="" name="请选择"/></p>
+                                                <p class="description">请输入3-8个文字</p>
+                                            </td>
+                                            <td ><p class="validator"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <th><strong>*</strong>ovsIp</th>
+                                            <td class="checkFun" lang="ovsIp">
+                                                <p class="formTexter" lang=""><input type="text" value="" name="请选择"/></p>
+                                                <p class="description">请输入3-8个文字</p>
+                                            </td>
+                                            <td ><p class="validator"></p></td>
+                                        </tr>
+                                        </table>
+                                </div>
+                                <p class="tabelBtn">
+                                    <button type="button" class="modelSubmit submitor" lang="myFn">提 交</button>
+                                    <button type="reset">重 置</button>
+                                </p>	
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       	</div>
+
+
+
+
+
+
+
+
+</block>

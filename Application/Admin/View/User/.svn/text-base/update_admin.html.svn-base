@@ -1,0 +1,154 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+
+<div id="main">
+	<div class="mainInc">
+		<div class="mainIncA">
+			<div class="mainIncB">
+				<div class="msgContent">
+					<form id="myForm" action="__ROOT__/Admin/User/updateAdminPwd"
+						method="post">
+						<h3 class="tableTitle">修改密码</h3>
+						<div class="msgTable">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<th width="14%">原始密码</th>
+									<td width="43%">
+										<p class="formTexter checkFun" lang="check_now">
+											<q class="radioInput"><input type="password"
+												value="" name="now_pwd" id="now_pwd" />
+												<input type="hidden" name="user_id" value="{$user.id}" >
+												</q>
+										</p>
+									</td>
+									<td width="43%"><p class="validator"></p></td>
+								</tr>
+
+								<tr>
+									<th>新密码</th>
+									<td>
+										<p class="formTexter checkFun" lang="check_new">
+											<q class="radioInput"><input type="password"
+												value="" name="new_pwd" id="pwd_new" /></q>
+										</p>
+									</td>
+									<td><p class="validator"></p></td>
+								</tr>
+								<tr>
+									<th>确认新密码</th>
+									<td>
+										<p class="formTexter checkFun" lang="check_new1">
+											<q class="radioInput"><input type="password"
+												value="" name="new_pwd" /></q>
+										</p>
+									</td>
+									<td><p class="validator"></p></td>
+								</tr>
+
+
+							</table>
+						</div>
+						<p class="tabelBtn">
+							<button type="button" class="modelSubmit submitor" lang="myFn">提
+								交</button>
+							<button type="reset">重 置</button>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+function myFn(){
+	//ALGOBLU.statusMsg("修改为正确");
+	//document.getElementById("myForm").submit();
+	var new_pwd = $("#pwd_new").val();
+	var now_pwd = $("#now_pwd").val();
+	$.ajax({
+		type: "GET",
+		url: "__ROOT__/Admin/User/updateAdminPwd",
+		async: false,
+		data: {id:{$user.id}, pwd:theValue},
+		  dataType: "json",
+		  success:function (data){
+			  if(data.success){
+			  }else{
+				  alert("修改失败,请联系技术人员");
+			  }
+		  }
+	});
+	
+	
+}
+
+
+VALIDATOR.form.check_now = function (arg)
+{
+	MYWARN = "原始密码不可为空";
+	var theValue = arg.find("input").val();
+	var falg = false;
+	if( theValue != "")
+	{
+      	$.ajax({
+			type: "GET",
+			url: "__ROOT__/Admin/User/checkpwd",
+			async: false,
+			data: {id:{$user.id}, pwd:theValue},
+			  dataType: "json",
+			  success:function (data){
+				  if(!data.success){
+					  MYWARN = "原始密码错误";
+					  falg = false;
+				  }else{
+					  falg = true;
+				  }
+			  }
+		});
+         return falg;
+	}
+	else
+	{
+		return false;
+	}
+	
+}
+VALIDATOR.form.check_new = function (arg)
+{
+	MYWARN = "请输入新密码";
+	var theValue = arg.find("input").val();
+	
+	if( theValue == "")
+	{
+		return false;
+	}
+	else 
+	{
+		return true;
+	}
+}
+VALIDATOR.form.check_new1 = function (arg)
+{
+	MYWARN = "请确认新密码";
+	var theValue = arg.find("input").val();
+	var new_pwd = $("#pwd_new").val();
+	var flag = false;
+	if( theValue == "")
+	{
+		return false;
+	}
+	else if(new_pwd != theValue)
+	{
+		MYWARN = "两次密码不一致";
+		return false;
+	}else{
+		return true;
+	}
+}
+
+
+</script> </block>

@@ -1,0 +1,93 @@
+<include file="Public/header" />
+
+<div class="subpageBody">
+    <div class="inc">
+        <h1 class="pageName">用户注册</h1>
+        <form id="form1" name="form1" action="{:U('home/do/reg')}" method="post">
+        <aside class="pageAside">
+            <hr class="pageHr">
+
+            <article class="form">
+                <div class="formParam">
+                    <h2>手机号码<a href="{:U('home/index/login')}">已有账号直接登录</a></h2>
+                    <input id="mobile" name="mobile" type="text"  class="userInput" required="required"/>
+                </div>
+                <div class="formParam">
+                    <h2>密码</h2>
+                    <input name="user_pwd" type="password" placeholder='输入6～12位密码'  class="userInput" id="pwd" required="required"/>
+                </div>
+                <div class="formParam">
+                    <h2>确认密码</h2>
+                    <input name="user_pwd_2" type="password" placeholder='输入6～12位密码'  class="userInput" id="check_pwd" required="required"/>
+                    <!-- <div class="warning">!两次密码不一致</div> -->
+                </div>
+
+                <div class="formParam checkNum">
+                    <h2>验证码</h2>
+                    <input id="code" name="code" type="text" placeholder='输入4位验证码'  class="userInput" required="required"/><button id="send_code" type="button">获取验证码</button>
+                </div>
+                <div class="formParam agreement">
+                <label><input type="checkBox" class="cBox" id="isAccept">我同意并阅读</label>
+                《<a href="./paper">拓灵云服务协议</a>》
+            </div>
+                <div class="formParam">
+                    <button type="submit" class="loginBtn">注册</button>
+                </div>
+                <div class="formParam error">
+                    <strong>×</strong><span>帐号密码错误</span>
+                </div>
+            </article>
+
+        </aside>
+        </form>
+        <!--
+        <aside class="AsideRight">
+            <h2>用第三方直接登录</h2>
+            <p class="thirdWay">
+                <a  href="#" class="qq">&nbsp;</a>
+                <a  href="#" class="wechat">&nbsp;</a>
+                <a  href="#" class="weibo">&nbsp;</a>
+            </p>
+        </aside>
+        -->
+    </div>
+</div>
+
+<include file="Public/footer" />
+
+<script>
+
+    //表单提交
+
+    $(".loginBtn").click(function(){
+        // var password = $("input[name='user_pwd']").val();
+        // var password2 = $("input[name='user_pwd_2']").val();
+        // if (password !== password2) {
+        //
+        // }
+        if (!$('#isAccept').prop("checked")) {
+            $('#isAccept').prop("checked","true");
+            // return ;
+        }
+        $("#form1").submit();
+    });
+
+    //发送验证码
+    $("#send_code").click(function(){
+        var mobile = $("#mobile").val();
+        if(!mobile){
+            alert('手机号不能为空');
+            return false;
+        }
+        $.post("{:U('home/do/sendcode')}", { mobile: mobile,key:1366},
+        function(data){
+
+            if(data === '0'){
+                alert('验证码发送成功');
+            }else{
+                alert('验证码发送失败');
+            }
+        }, 'text');
+
+    });
+</script>

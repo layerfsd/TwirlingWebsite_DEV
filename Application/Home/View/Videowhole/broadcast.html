@@ -1,0 +1,25 @@
+<include file="Public/header" />
+<div class="userPageTitle">
+    <div class="inc">
+        <div class="userMsg">
+            <p class="person">
+                全景直播
+            </p>
+        </div>
+    </div>
+    <div class="pageTitleBg"></div>
+</div>
+<div class="userPageContent detailPage">
+    <div class="inc">
+      <div  class="container show_player">
+    		<div id="player" >
+    			<script type="text/javascript" charset="utf-8" src="http://yuntv.letv.com/player/live/blive.js"></script>
+    			<script>
+    				var player = new CloudLivePlayer();
+    				player.init({activityId:"A2016060100001rx"});
+    			</script>
+    		</div>
+      </div>
+    </div>
+</div>
+<include file="Public/footer" />

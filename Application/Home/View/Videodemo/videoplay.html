@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<!--
+	Beijing Tuoling Inc. 2015 - twirlingvr.com
+-->
+<html>
+<head>
+    <title>twirlingvr player</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+    <script src="__PUBLIC__/viewer/twirlingvrPlayer.js?a=1"></script>
+
+    <script type="text/javascript">
+        function changeVideo(xmlName) {
+            var krpano = document.getElementById("krpanoSWFObject");
+            krpano.call("loadpano("+xmlName+");");
+        }
+    </script>
+
+</head>
+<body>
+<div id="pano" style="height: 47.81vw; /* height:width ratio = 9/16 = .5625 (*85) */">
+    <noscript><table style="width:100%;height:100%;"><tr style="vertical-align:middle;"><td><div style="text-align:center;">ERROR:<br/><br/>Javascript not activated<br/><br/></div></td></tr></table></noscript>
+    <script>
+        embedpano({swf:"__PUBLIC__/viewer/twirlingvrPlayer.swf", xml:"{:U('home/videodemo/getvideoxml')}?video_uuid={$video_uuid}&a=<?php echo time();?>", target:"pano", html5:"only", passQueryParameters:false, mwheel:false});
+    </script>
+</div>
+
+
+<a class="button" onclick="changeVideo('film2.xml')">
+
+</body>
+</html>

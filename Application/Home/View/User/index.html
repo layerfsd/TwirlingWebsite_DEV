@@ -1,0 +1,177 @@
+<include file="Public/header" />
+<style>
+.line{
+    text-decoration:line-through;
+}
+</style>
+<div class="userPageTitle">
+    <div class="inc">
+        <div class="userMsg">
+            <p class="person">
+                个人中心
+            </p>
+            <aside>
+                <!--<h2>-->
+                <!--{$userinfo.mobile}-->
+                <!--</h2>-->
+                <!--<p>-->
+                <!--{$userinfo.create_time|date="Y-m-d",###} 加入<br>-->
+                <!--</p>-->
+                <div class="description">
+                    <table  border="0" cellspacing="0" cellpadding="0">
+
+                        <tr>
+                            <th width='35%'>邮箱:</th>
+                            <td width='50%'><span class='mobile'>{$userinfo.email|default='还没有设定邮箱'}</span></td>
+                            <td width='15%'><a href="{:U('home/user/edit')}">编辑</a></td>
+                        </tr>
+                        <tr>
+                            <th>已绑定手机:</th>
+                            <td>{$userinfo.mobile}</td>
+                            <td></td>
+                        </tr>
+						<!--
+						<tr>
+                            <th>资质审核情况</th>
+                            <td>
+							<?php if($userinfo['zizhi_status'] == 0):?>
+								未上传
+							<?php endif;?>
+							<?php if($userinfo['zizhi_status'] == 1):?>
+								待审核
+							<?php endif;?>
+							<?php if($userinfo['zizhi_status'] == 2):?>
+								已通过
+							<?php endif;?>
+							</td>
+                            <td>
+							<a href="{:U('home/user/zizhi')}">上传/编辑</a>
+							</td>
+                        </tr>
+						-->
+                    </table>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <div class="pageTitleBg"></div>
+</div>
+<div class="userPageContent detailPage">
+    <div class="inc">
+        <nav>
+            <a href="{:U('home/user/index')}" class="label">
+                购买产品
+            </a>
+            <a href="{:U('home/user/fuwu')}">
+                购买服务
+            </a>
+            <a href="{:U('home/user/orderlist')}">
+                账单
+            </a>
+        </nav>
+        <article class="content">
+            <h1>
+                服务/产品
+            </h1>
+            <h4>
+
+            </h4>
+            <div class="table">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>产品</th>
+                        <th>售价</th>
+                        <th>早鸟价</th>
+                        <th>购买数量</th>
+
+                    </tr>
+                   <!--  <tr>
+                        <td><span class="title">小蚁相机（5台）</span></td>
+                        <td><span class="price">6000(元)</span></td>
+                        <td>
+                            <select name="num" class="select_num" data-name="小蚁相机（5台）" data-price="6000">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td><span class="title">小蚁全景相机支架</span></td>
+                        <td><span class="price">2000(元)</span></td>
+                        <td>
+                            <select name="num" class="select_num" data-name="小蚁全景相机支架" data-price="2000">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+
+                    </tr>
+                    <tr> -->
+                        <td><span class="title">全向声场录制机</span></td>
+                        <td><span class="price"><span class="line">4999(元)</span></span></td>
+                        <td><span class="price">2999(元)</span></td>
+                        <td>
+                            <select name="num" class="select_num" data-name="全向声场录制机" data-price="2999">
+                                <option value="0" selected>0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+
+                    </tr>
+
+                </table>
+                <br/>
+                已选商品：<span id="number">0</span>件 <span id="name"></span> 合计：￥<span id="price">0</span>元  <a id="jiesuan" href="" class="buy">结算</a>
+            </div>
+
+        </article>
+    </div>
+</div>
+</div>
+<include file="Public/footer" />
+
+<script>
+
+    $(".select_num").change(function(){
+        var number = 0;
+        var price = 0;
+        var name = "";
+        //alert($(this).attr("data-price"));
+
+        //计算数量和钱数
+        $(".select_num").each(function(){
+            //alert($(this).attr("data-price"));
+            //alert(Number($(this).val()));
+            number += Number($(this).val());
+            price += Number($(this).val()) * Number($(this).attr("data-price"));
+            if($(this).val() != 0){
+                name += $(this).attr("data-name") + '×' + $(this).val();
+            }
+        });
+
+        //alert(number);
+        //alert(price);
+        //alert(name);
+        $("#number").html(number);
+        $("#price").html(price);
+        $("#name").html(name);
+        $("#jiesuan").attr('href', "{:U('home/user/address')}?ordername=" + name + "&price=" + price);
+
+
+    });
+
+</script>

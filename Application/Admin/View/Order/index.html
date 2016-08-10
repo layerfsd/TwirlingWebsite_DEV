@@ -1,0 +1,225 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+
+
+
+
+<div id="main">
+	<div class="mainInc">
+		<div class="mainIncA">
+			<div class="mainIncB">
+				<div class="pageInfo">
+					<h1>订单管理</h1>
+				</div>
+				
+				<form action="__ROOT__/Admin/Order/index" method="get">
+				<div class="searchCondition">
+					<span> <strong>订单编号</strong> <input type="text"
+						placeholder="请输入订单编号" class="texter" name="search" value="{$search}" />
+					</span> <span> 
+					<strong>状态</strong> <select name="status">
+							<option value="1" <if condition="$status == 1">selected</if>>已支付</option>
+							<option value="0" <if condition="$status == 0">selected</if>>未支付</option>
+							<option value="-1" <if condition="$status == -1">selected</if>>全部</option>
+					</select>
+					</span>
+					<button type="submit">
+						<span class="search">&nbsp;</span>搜 索
+					</button>
+					<button type="reset">
+						<span class="reset">&nbsp;</span>重 置
+					</button>
+				</div>
+				</form>
+				<div class="msgContent">
+					<div class="listTable">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<!-- <th><input type="checkbox" title="全选" /></th> -->
+									<td>订单号</td>
+									<td>地址</td>
+									<td>用户手机</td>
+									<!-- <td>视频总数</td>
+									<td>音频总数</td> -->
+                                    <td>商品名称</td>
+									<td>联系方式</td>
+									<td>订单金额</td>
+									<td>生成时间</td>
+									<if condition="$status == 1"><td>支付方式</td></if>
+                                    <td>订单类型</td>
+									<td>状态</td>
+									<!-- <td>操作</td> -->
+								</tr>
+							</thead>
+							<tbody>
+
+								<foreach name="list" item="order">
+								<tr>
+									<!-- <th><input type="checkbox" title="选择" /></th> -->
+									<td>{$order.order_sn}</td>
+									<td><a href="#" class='addressBtn' data-address="地址：{$order.address} 电话：{$order.address_mobile}">地址</a></td>
+                                    <td>
+                                        {$order.name}
+                                    </td>
+
+
+									<!-- <td>{$order.video_cnt}</td>
+									<td>{$order.audio_cnt}</td> -->
+                                    <td>{$order.order_name}</td>
+									<td>
+										{$order.user_info.email}
+									</td>
+									<td>{$order.order_money}</td>
+									<td>{$order.create_time|date='Y-m-d H:m:s',###}</td>
+									
+									<if condition="$status == 1">
+										<td>
+											<if condition="$order.order_method_pay == 1">微信</if> 
+										    <if condition="$order.order_method_pay == 2">支付宝</if>
+										</td>
+										
+									</if>
+                                    <td>
+                                        <if condition="$order.type == 1">视频合成</if>
+                                        <if condition="$order.type == 2">购买商品</if>
+                                    </td>
+									<td>
+											<if condition="$order.status == 1">已支付</if>
+											<if condition="$order.status == 0">未支付
+											<input name="operate" type="button" class="buttoner"
+												id="{$order.id}" lang="{$order.order_money}"  value="修改价格" >
+											</if> 
+									</td>
+									
+								</tr>
+								</foreach>
+							</tbody>
+						</table>
+					</div>
+					<div class="tools">
+						<div class="pageMark">
+							{$show}
+							<!-- <button class="back">&lt;</button>
+							<input type="text" class="num" size="3" value="5" /><span>/10</span>
+							<button class="sure">Go</button>
+							<button class="forward">&gt;</button> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<div id="price" class="hidding dialogEditor" lang="修改价格">
+		<div class="searchDetail">
+			<dl>
+				<dt>修改价格</dt>
+				<dd>
+					<input type="text" class="texter" name="money" id="money" value="">
+				</dd>
+			</dl>
+			<div class="searchBtn">
+				<input type="hidden" name="order_id" id="order_id" value="" />
+				<input type="button" value="确定修改" onclick="updateMoney();">
+			</div>
+		</div>
+		</div>
+<div  class="hidding dialogEditor addressDialog" lang="查看地址">
+	<div class="searchDetail">
+			<dl>
+				
+				<dd class='addr'>
+					查看地址
+				</dd>
+			</dl>
+			
+		</div>
+</div>
+<script type="text/javascript">
+  $(function (){
+		$('.buttoner').on('click',function (){
+	      //打开窗口
+	      var id = $(this).attr('id');
+	      var money = $(this).attr('lang');
+	      $("#order_id").val(id);
+	      $("#money").val(money);
+	      
+	      var model = $("#price");
+	      var dialog = art.dialog({
+	        title: model.attr("lang"),
+	        content:model[0],
+	        icon: 'succeed',
+	        lock:true,
+	        button: [{
+	          name: '关闭'
+	        }]
+	      });
+	
+	    })
+  })
+</script>
+<script type="text/javascript">
+	function updateMoney(){
+		var money = $("#money").val();
+		var id = $("#order_id").val();
+		if(!isNaN(money)){
+			 if(money > 999999999){
+				alert('价格无效！最高支持999999999');
+				return;
+			}
+			$.ajax({
+				type: "POST",
+				url: "__ROOT__/Admin/Order/updateMoney/",
+				async: false,
+				data: {money:money, id:id},
+				  dataType: "json",
+				  success:function (data){
+					  if(data.success){
+						  alert(data.msg);
+						  /* var url = "__ROOT__/Admin/Video/index";
+						  window.location.href=url; 
+						   */
+						  location.reload() ;
+						   
+					  }else{
+						  alert(data.msg);
+						 /*  var url = "__ROOT__/Admin/Video/index";
+						 window.location.href=url; 
+						   */
+						  location.reload() 
+					  }
+				  }
+			});
+			
+		}else{
+			alert("价格必须为数字");
+		}
+		
+		
+	}
+	
+	var model = $(".addressDialog");
+	$(".addressBtn").on("click",function (e){
+		var msg = $(this).attr('data-address');
+		e.preventDefault();
+		var dialog = art.dialog({
+			title: model.attr("lang"),
+			content:model[0],
+			icon: 'succeed',
+			lock:true,
+			button: [{
+				name: '关闭'
+			}]
+		});
+		$(".addressDialog .addr").text(msg);
+		
+	})
+	//关闭按钮
+	model.find(".closeBtn").on("click",function (){
+		$(".aui_buttons button").trigger("click")
+	})
+</script>
+</block>

@@ -1,0 +1,358 @@
+<include file="Public/header" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script src="__PUBLIC__/uploadify/jquery.min.js"></script>
+<script src="__PUBLIC__/uploadify/jquery.danmu.js"></script>
+<style>
+  #danmu{
+    position:absolute;
+    z-index:999;
+   /* width:713px;
+    height:370px;*/
+    background:transparent;
+  /*background:silver;*/
+    width:960px;
+    height:540px;
+    font-size:14px;
+    color:#fff;
+  }
+  #danmu_text{
+    position:relative;
+    top:-10px;
+    left:0px;
+    border: 1px solid #ccc;
+  /*  border:1px solid black;*/
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: black;
+    display: block;
+    font-size: 14px;
+    width: 833px;
+    height: 30px;
+  }
+/*  #danmu_text:focus{
+     border:1px solid black;
+  }*/
+  #danmu_s{
+    position:relative;
+    top:-42px;
+    left:835px;
+    width:60px;
+    height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    display: block;
+    font-size: 14px;
+  }
+ /* #danmu_s:focus{
+    border: 1px solid #F03800;
+    background:#F03800;
+    color:white;
+
+  }*/
+  #danmu_s:hover{
+    border: 1px solid #F03800;
+    background:#F03800;
+    color:white;
+
+  }
+  .danmu_btn{
+    position:relative;
+    top:-74px;
+    left:895px;
+    width:64px;
+    height: 32px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    display: block;
+    font-size: 14px;
+
+  }
+  .danmu_btn:hover{
+    border: 1px solid #F03800;
+    background:#F03800;
+    color:white;
+  }
+  #video_demo{
+    margin-left:0px;
+    width:960px;
+    height:540px;
+    border-radius:5px;
+  }
+  @media only screen and (max-width:700px){
+     #danmu{
+    position:absolute;
+    z-index:999;
+   /* width:713px;
+    height:370px;*/
+    background:transparent;
+  /*background:silver;*/
+    width: 300px;
+    height: 215px;  
+    font-size:14px;
+    color:#fff;
+  }
+  #danmu_text{
+    position:relative;
+    top:-10px;
+    left:6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    color: black;
+    display: block;
+    font-size: 14px;
+    width: 214px;
+    height: 23px;
+  }
+  #danmu_s{
+    position:relative;
+    top:-35px;
+    left:222px;
+    width:32px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    display: block;
+    font-size: 12px;
+  }
+
+  #danmu_s:hover{
+    border: 1px solid #F03800;
+    background:#F03800;
+    color:white;
+
+  }
+  .danmu_btn{
+    position:relative;
+    top:-60px;
+    left:254px;
+    width:53px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #555;
+    display: block;
+    font-size: 12px;
+
+  }
+  .danmu_btn:hover{
+    border: 1px solid #F03800;
+    background:#F03800;
+    color:white;
+  }
+  #video_demo{
+    margin-left:0px;
+   width: 300px;
+    height: 215px;
+    border-radius:5px;
+  /*  width:715px;
+    height:400px;*/
+    }
+  }
+
+</style>
+<div class="userPageTitle">
+    <div class="inc">
+        <div class="userMsg">
+            <p class="person">
+                全景声Demo
+            </p>
+        </div>
+    </div>
+    <div class="pageTitleBg"></div>
+</div>
+<div class="userPageContent detailPage">
+    <div class="inc">
+      <section class='audioList'>
+        <h2>全景声Demo</h2>
+        <article class='bigVideo'>
+          <figure>
+          <!--   <p> -->
+         <!--  <div class="demo"> -->
+            <div id="danmu"></div>
+              <video  id="video_demo" src="http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/up_2016-06-02/AudioDemo1920x1080_5MB.mp4"  controls="controls" poster="http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/up_2016-06-02/AudioDemo960.jpg">
+                    Your browser does not support the video tag.
+              </video>
+              <input id="danmu_text" type="text" />
+              <input id="danmu_s" type="button" onclick="sendss()" value="发送" />
+             <!--  <div class="">
+                <div class="clerafix">
+                ::before
+                <h3></h3>
+              </div> -->
+              <input class="danmu_btn" type="button"  value="打开弹幕"/>
+          <!-- </div> -->
+         <!--    </p> -->
+          </figure>
+        </article>
+      </section>
+      <section class='audioList second'>
+        <h2>拓灵全景音乐</h2>
+        <article>
+          <?php foreach($list as $k=>$v):?>
+          <figure>
+              <div class="img-box">
+                  <p>
+                    <img src="<?php echo $v['pic_url']?>"/>
+                  </p>
+                  <audio controls="controls">
+                    <source src="<?php echo $v['mp3']?>" type="audio/mpeg">
+                  Your browser does not support the audio tag.
+                  </audio>
+                  <figcaption><?php echo $v['video_title']?></figcaption>
+              </div>
+          </figure>
+        <?php endforeach;?>
+        </article>
+      </section>
+    </div>
+  </div>
+<include file="Public/footer" />
+<script>
+  // alert($(document).width());
+  //alert($('video').attr("id"))
+if ($(document).width() < 700)
+{ 
+    $('#danmu').hide();
+    $('#danmu_text').hide();
+    $('#danmu_s').hide();
+    $('.danmu_btn').hide();
+}
+$(function(){
+  $("#danmu").danmu({
+      left: 0,    //区域的起始位置x坐标
+      top: "55px" ,  //区域的起始位置y坐标
+      zindex:999,
+      width:"960px",
+      height:"515px",
+      speed:25000, //弹幕速度，飞过区域的毫秒数 
+      sumtime:1000 , //弹幕运行总时间
+      danmuss:{}, //danmuss对象，运行时的弹幕内容 
+      default_font_color:"#FFFFFF", //弹幕默认字体颜色 
+      font_size_small:16, 
+      //小号弹幕的字体大小,注意此属性值只能是整数
+      font_size_big:24, //大号弹幕的字体大小 
+      // opacity:"0.9", //弹幕默认透明度 
+       top_botton_danmu_time:6000, //顶端底端弹幕持续时间 
+       url_to_post_danmu:"",
+       url_to_get_danmu:""
+  });
+  var myVid = document.getElementById("video_demo");
+  var ctime = myVid.currentTime;
+     // alert(ctime);
+     if(ctime>0 && ctime<11160){
+        sendss();
+     }else{
+        $("#danmu").hide();
+     }
+  $('#danmu').danmu('danmu_resume');//弹幕暂停后继续
+
+  $(".danmu_btn").click(function(){
+    var value = $(".danmu_btn").val();
+    var myVid = document.getElementById("video_demo");
+   
+    var ctime = myVid.currentTime;//获取视频时间
+     // alert(ctime);
+    if(value=="打开弹幕" ){
+      if(ctime>0&&ctime<11160){
+        $("#danmu").show();
+        $(".danmu_btn").val("关闭弹幕");
+      }
+    }else{
+      $("#danmu").hide();
+      $(".danmu_btn").val("打开弹幕");
+    }
+  })
+});
+
+
+function sendss(){
+    var time = jQuery('#danmu').data("nowtime");
+    var text = $("#danmu_text").val();
+    var color = getRandomColor();
+    // url_to_post_danmu = "";
+    // url_to_get_danmu = "";
+
+    // var text_obj = '{text:"'+text+'",color:"'+color+'",size:"'+1+'",position:"'+0+'",time:'+time+'}';
+
+    // if(url_to_post_danmu){
+    //   jQuery.post(url_to_post_danmu,{
+    //     danmu:text_obj
+    //   });
+    // }
+    // var text_obj = '{ text:"' + text + '",color:"' + color + '",size:"' + 1 + '",position:"' + 0 + '",time:' + time + ',isnew:""}';  
+    //  //本地用户弹幕，构造加上了innew属性的字符串danmu对象
+
+    //  var new_obj = eval('('+text_obj+')');
+
+    //  jQuery('#danmu').danmu("add_danmu", new_obj); 
+
+  //将输入数据存储
+  $.ajax({
+    url:'add.php',
+    type:'POST',
+    data:{
+      'id':$('video').attr("id"),
+      'text':text,
+      // 'color':color,
+      // 'size':1,
+      // 'position':0,
+      // 'time':time,
+      'ctime':ctime,
+      'isnew':''
+      }
+    })
+  }
+
+
+window.onload = function(){
+    loadVideo();
+    videoTalk();
+}
+//加载视频
+function loadVideo(){
+    var myVid = document.getElementById("video_demo");
+    myVid.oncanplay = function(){
+      $.ajax({
+        url:'getvideo.php',
+        type:'GET',
+        data:{
+          'id':$('video').attr("id"),
+        }
+      })
+
+    }
+}
+//加载评论
+function videoTalk(){
+  $('#video_demo').load = function(){
+      var myVid = document.getElementById("video_demo");
+      var ctime = myVid.currentTime;//获取视频时间点
+        $.ajax({
+            url:'get.php',
+            type:'GET',
+            data:{
+              'id':$('video').attr("id"),
+              // 'text':text,
+              // 'ctime':ctime,
+              // 'isnew':''
+              // 'color':color,
+              // 'size':1,
+              // 'position':0,
+              // 'time':time,
+                }
+              })
+        }
+}
+
+  
+function getRandomColor(){
+  return '#' + (function(h){
+    return new Array(7 - h.length).join("0") + h
+  })
+  ((Math.random() * 0x1000000 << 0).toString(16));
+}
+</script>

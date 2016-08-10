@@ -1,0 +1,69 @@
+<include file="Public/header" />
+<link rel="stylesheet" type="text/css"href="__PUBLIC__/plupload-2.1.2/css/style.css" />
+<link rel="stylesheet" type="text/css" href="http://static.twirlingvr.com/yun/website/script/artDialog/artDialog.css">
+<script src="http://static.twirlingvr.com/yun/website/script/artDialog/artDialog.js"></script>
+
+
+<div class="userPageTitle">
+	<div class="inc">
+		<h1 class="pageName">分轨文件上传</h1>
+	</div>
+	<div class="pageTitleBg"></div>
+</div>
+	<form action="__ROOT__/Home/Video/doAdd" id="myfom" method="post">
+<div class="userPageContent inc " id="videoUpload">
+	<input type="hidden" name="all_video_title" value="" id="all_video_title">
+	<input type="hidden" name="all_video_desc" value="" id="all_video_desc">
+	<input type="hidden" name="uuid" value="{$uuid}" id= "uuid">
+	<input type="hidden" name="test" value="asdfaf -副本.mp4" id= "aaa">
+
+	<div class="video list">
+		<aside class="videoTool">
+			<h1>上传分轨文件</h1>
+			<p>
+				<a  id="selectfiles" href="javascript:void(0);"> 选择音视频 </a>
+				<a id="postfiles" href="javascript:void(0);" class="beginUpload"> 开始上传 </a>
+
+				<span>支持同时上传多个文件，其他提供方式（网盘、移动硬盘、上门制作等）请<a href="#toFooter">联系我们</a> </span>
+			</p>
+		</aside>
+		<div class="content" id="content">
+			<h2 class="allDescription">
+				<!-- <a href="#"><span></span>为视频填加统一描述</a> -->
+			</h2>
+			<ul>
+				<div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！
+				</div>
+				<div id="console"></div>
+			</ul>
+		</div>
+	</div>
+</div>
+	</form>
+<div class="nextStep">
+	<a href="#" id="is_ok" class="disable" > <span >等待上传</span> <strong>下一步 </strong></a>
+</div>
+
+
+<article class="artModel videoDescription">
+	<input type='hidden' id='artDesId'>
+	<h1></h1>
+	<p>
+		<strong>标题</strong> <input type="text" class="searchInput" id="video_title">
+	</p>
+	<p>
+		<strong>描述</strong>
+		<textarea class="searchInput textareas" id="video_desc"></textarea>
+
+	</p>
+	<p class="buttonInc">
+		<a href="#" class="buttons yellowBtn sure">确定</a> <a
+			href="#" class="buttons blackBtn closeBtn">取消</a>
+	</p>
+</article>
+
+<script type="text/javascript"
+	src="__PUBLIC__/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript"
+	src="__PUBLIC__/plupload-2.1.2/js/upload_video.js"></script>
+<include file="Public/footer" />

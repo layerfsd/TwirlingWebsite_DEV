@@ -1,0 +1,36 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+
+<form action="__ROOT__/Admin/Order/doAdd" method="post">
+
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/de/prismplayer/1.3.3/skins/default/index-min.css" />
+<script type="text/javascript" src="//g.alicdn.com/de/prismplayer/1.3.3/prism-min.js"></script>
+
+
+标题:{$video.video_title}
+描述:{$video.video_desc}
+
+
+
+<foreach name="list" item="video">
+
+	标题:{$video.video_title}
+	描述:{$video.video_desc}
+	<a href="{$video.aliyun_url}">原始下载地址:</a>
+	<video  width="260" height="146" src="{$video.aliyun_url}" controls="controls" >
+	您的浏览器不支持 video 标签。
+	</video>
+	</br>
+	</br>
+	
+</foreach>
+</br>
+</br>
+</br>
+</br>
+<input type="hidden" name="uid" value="{$uuid}">
+定价:<input type="text" name="money" >
+<button type="submit" value="确认">生成订单</button>
+</form>
+</block>

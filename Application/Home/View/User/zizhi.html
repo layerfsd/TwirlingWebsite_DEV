@@ -1,0 +1,42 @@
+<include file="Public/header" />
+<div class="subpageBody">
+    <div class="inc">
+        <h1 class="pageName">上传资质(审核状态：<?php if($userinfo['zizhi_status'] == 0){echo '未上传';}else if($userinfo['zizhi_status'] == 1){echo '待审核';}else if($userinfo['zizhi_status'] == 2){echo '已通过';}?>)</h1>
+        <form id="form1" name="form1" action="{:U('home/userdo/userzizhido')}" enctype="multipart/form-data" method="post">
+			<aside class="pageAside">
+                <hr class="pageHr">
+
+                    <article class="form">
+                    <div class="formParam">
+                        <p>
+                            <input type="file" name="zizhi" />
+                        </p>
+                    </div>
+					<?php if($userinfo['zizhi'] !== ''):?>
+					<div class="formParam">
+						<img src="/Public/Uploads/<?php echo $userinfo['zizhi']?>" />
+					</div>
+					<?php endif;?>
+                    <div class="formParam">
+                        <button type="button" class="loginBtn">提交</button>
+                    </div>
+
+                </article>
+
+            </aside>
+        </form>
+    </div>
+</div>
+
+<include file="Public/footer" />
+
+
+
+<script>
+
+    //表单提交
+    $(".loginBtn").click(function(){
+        $("#form1").submit();
+    });
+
+</script>

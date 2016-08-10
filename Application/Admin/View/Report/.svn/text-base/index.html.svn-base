@@ -1,0 +1,94 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+<script type="text/javascript"
+	src="__PUBLIC__/My97DatePicker/WdatePicker.js"></script>
+
+
+
+<div id="main">
+	<div class="mainInc">
+		<div class="mainIncA">
+			<div class="mainIncB">
+				<div class="pageInfo">
+					<h1>数据中心</h1>
+				</div>
+				
+				<form action="__ROOT__/Admin/Report/index" method="get">
+				<div class="searchCondition">
+					<span> <strong>开始时间</strong> 
+					<input type="text" class="texter" id="startDate" name="start_time" value="{$start_time}" onClick="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d-1'})" />
+					</span> 
+					
+					<span> <strong>结束时间</strong> 
+					<input type="text" class="texter" id="startDate" name="end_time" value="{$end_time}" onClick="WdatePicker({skin:'whyGreen',maxDate:'%y-%M-%d-1'})" />
+					</span> 
+					
+					
+					<button type="submit">
+						<span class="search">&nbsp;</span>搜 索
+					</button>
+					<button type="button" onclick="reset();">
+						<span class="reset">&nbsp;</span>重 置
+					</button>
+				</div>
+				</form>
+				<div class="msgContent">
+					<div class="listTable">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<!-- <th><input type="checkbox" title="全选" /></th> -->
+									<td>日期</td>
+									<td>当日上传视频量</td>
+									<td>当日上传音频量</td>
+									<td>当日注册用户</td>
+									<td>当日订单数</td>
+									<td>当日支付订单数</td>
+									<td>当日未支付订单数</td>
+									<td>当日订单总额</td>
+								</tr>
+							</thead>
+							<tbody>
+
+								<foreach name="list" item="report">
+								<tr>
+									<!-- <th><input type="checkbox" title="选择" /></th> -->
+									<td>{$report.report_date}</td>
+									<td>{$report.up_video}</td>
+									<td>{$report.up_audio}</td>
+									<td>{$report.regist}</td>
+									<td>{$report.order}</td>
+									<td>{$report.pay_order}</td>
+									<td>{$report.not_pay_order}</td>
+									<td>{$report.pay_money}</td>
+									
+								</tr>
+								</foreach>
+							</tbody>
+						</table>
+					</div>
+					<div class="tools">
+						<p class="pageMark">
+							{$show}
+						
+						
+							<!-- <button class="back">&lt;</button>
+							<input type="text" class="num" size="3" value="5" /><span>/10</span>
+							<button class="sure">Go</button>
+							<button class="forward">&gt;</button> -->
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" >
+
+	function reset(){
+		$("#start_time").val("");
+		$("#end_time").val("");
+	}
+</script>
+</block>

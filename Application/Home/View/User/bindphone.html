@@ -1,0 +1,66 @@
+<include file="Public/header" />
+
+<div class="subpageBody">
+    <div class="inc">
+        <h1 class="pageName">绑定手机</h1>
+        <form id="form1" name="form1" action="{:U('home/userdo/bindphone')}" method="post">
+            <aside class="pageAside">
+                <hr class="pageHr">
+
+                    <article class="form">
+                    <div class="formParam">
+                        <h2>手机号码</h2>
+                        <p>
+                            <input id="mobile" name="mobile" type="text"  class="userInput" />
+                        </p>
+                    </div>
+                    <div class="formParam checkNum">
+                        <h2>验证码</h2>
+                        <p>
+                            <input id="code" name="code" type="text" placeholder='输入4位验证码'  class="userInput" /><button id="send_code" type="button">获取验证码</button>
+                        </p>
+                    </div>
+
+                    <div class="formParam">
+                        <button type="button" class="loginBtn">提交</button>
+                        <input type="hidden" name="userid" value="<?php echo session('tl_userid')?>" />
+                    </div>
+
+                </article>
+
+            </aside>
+        </form>
+    </div>
+</div>
+
+<include file="Public/footer" />
+
+
+
+<script>
+
+    //表单提交
+    $(".loginBtn").click(function(){
+        $("#form1").submit();
+    });
+
+    //发送验证码
+    $("#send_code").click(function(){
+        var mobile = $("#mobile").val();
+        if(!mobile){
+            alert('手机号不能为空');
+            return false;
+        }
+        $.post("{:U('home/do/sendcode')}", { mobile: mobile,key:1366},
+                function(data){
+
+                    if(data === '0'){
+                        alert('验证码发送成功');
+                    }else{
+                        alert('验证码发送失败');
+                    }
+                }, 'text');
+
+    });
+
+</script>

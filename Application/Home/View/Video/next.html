@@ -1,0 +1,50 @@
+<include file="Public/header" />
+<div class="userPageTitle">
+	<div class="inc">
+		<h1 class="pageName">合成视频信息</h1>
+	</div>
+	<div class="pageTitleBg"></div>
+</div>
+
+<form action="__ROOT__/Home/Video/doVideoNext" method="post">
+
+<div class="userPageContent inc " id="videoUpload">
+	<input type="hidden" name="uuid" value="{$uuid}">
+	<aside class="pageAside">
+		<article class="form">
+			<div class="formParam">
+				<h1>音视频描述</h1>
+			</div>
+			<div class="formParam">
+				<h2>合成音视频标题</h2>
+				<p>
+					<input type="text" class="userInput" name="title" />
+				</p>
+			</div>
+			<div class="formParam">
+				<h2>合成音视频描述</h2>
+				<p>
+					<textarea class="userInput textareas" name="desc"></textarea>
+				</p>
+			</div>
+			<div class="formParam">
+				<button type="submit" class="submitRequire">提交合成请求</button>
+			</div>
+			<div class="formParam error"></div>
+		</article>
+	</aside>
+	<article class="source">
+		<h2>合成素材</h2>
+		<p class="videos">
+			<span></span>包含视频文件<strong>{$vct}个</strong>
+		</p>
+		<p class="sounds">
+			<span></span>包含音频文件<strong>{$act}个</strong>
+		</p>
+	</article>
+</div>
+</form>
+
+
+
+<include file="Public/footer" />

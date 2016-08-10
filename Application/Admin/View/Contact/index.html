@@ -1,0 +1,69 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+
+
+
+
+<div id="main">
+	<div class="mainInc">
+		<div class="mainIncA">
+			<div class="mainIncB">
+				<div class="pageInfo">
+					<h1>留言管理</h1>
+				</div>
+				
+				<form action="__ROOT__/Admin/Contact/index" method="get">
+				<div class="searchCondition">
+					<span> <strong>留言内容</strong> <input type="text"
+						placeholder="请输入留言内容" class="texter" name="search" value="{$search}" />
+					</span> <span> 
+				
+					</span>
+					<button type="submit">
+						<span class="search">&nbsp;</span>搜 索
+					</button>
+					<button type="reset">
+						<span class="reset">&nbsp;</span>重 置
+					</button>
+				</div>
+				</form>
+				<div class="msgContent">
+					<div class="listTable">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<td>联系人</td>
+                                    <td>联系方式</td>
+									<td>留言内容</td>
+									<td>留言时间</td>
+								</tr>
+							</thead>
+							<tbody>
+
+								<foreach name="list" item="msg">
+								<tr>
+									<td valign='top'>{$msg.name}</td>
+                                    <td valign='top'> 
+                                        {$msg.telemail}
+                                    </td>
+                                    <td valign='top' class="msg_content">{$msg.content}</td>
+									<td valign='top'>{$msg.ctime|date='Y-m-d H:m:s',###}</td>
+								</tr>
+								</foreach>
+							</tbody>
+						</table>
+					</div>
+					<div class="tools">
+						<div class="pageMark">
+							{$show}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</block>

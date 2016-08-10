@@ -1,0 +1,165 @@
+<include file="Public/header" />
+<div class="userPageTitle">
+    <div class="inc">
+        <div class="userMsg">
+            <p class="person">
+                个人中心
+            </p>
+            <aside>
+                <!--<h2>-->
+                <!--{$userinfo.mobile}-->
+                <!--</h2>-->
+                <!--<p>-->
+                <!--{$userinfo.create_time|date="Y-m-d",###} 加入<br>-->
+                <!--</p>-->
+                <div class="description">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                        <tr>
+                            <th>邮箱：</th>
+                            <td>{$userinfo.email|default='还没有设定邮箱'}</td>
+                            <td><a href="{:U('home/user/edit')}">编辑</a></td>
+                        </tr>
+                        <tr>
+                            <th>已绑定手机：</th>
+                            <td>{$userinfo.mobile}</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <div class="pageTitleBg"></div>
+</div>
+<div class="userPageContent detailPage">
+    <div class="inc">
+        <nav>
+            <a href="{:U('home/user/index')}">
+                购买产品
+            </a>
+            <a href="{:U('home/user/fuwu')}" class="label">
+                购买服务
+            </a>
+            <a href="{:U('home/user/orderlist')}">
+                账单
+            </a>
+        </nav>
+        <article class="content">
+            <h1>
+                服务/产品
+            </h1>
+            <h4>
+
+            </h4>
+            <div class="table">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>产品</th>
+                        <th>报价</th>
+                        <th width="50">&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <td><span class="title">Audio SDK(全景声制作SDK)</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=Audio SDK(全景声制作SDK)&price=99999" class="buy">购买</a></td>
+                    </tr>
+                     <tr>
+                        <td><span class="title">全景直播服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=全景直播服务&price=99999" class="buy">购买</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="title">全景声录制合成服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=全景声录制合成服务&price=99999" class="buy">购买</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="title">全景声制作后期服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=全景声制作后期服务&price=99999" class="buy">购买</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="title">全景视频拍摄服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=全景视频拍摄服务&price=99999" class="buy">购买</a></td>
+                    </tr>
+                     <tr>
+                        <td><span class="title">全景视频后期合成服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=产品测试1&price=99999" class="buy">购买</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="title">网页端全景视频播放技术服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=网页端全景视频播放技术服务&price=99999" class="buy">购买</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="title">视频拼接服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=视频拼接服务&price=99999" class="buy">购买</a></td>
+                    </tr>
+                    <!-- <tr>
+                        <td><span class="title">全景视频拍摄服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=全景视频拍摄服务&price=99999" class="buy">购买</a></td>
+                    </tr> -->
+
+                   <!--  <tr>
+                        <td><span class="title">全景视频后期合成服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=产品测试1&price=99999" class="buy">购买</a></td>
+                    </tr> -->
+                    <!-- <tr>
+                        <td><span class="title">全景声录制合成服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=全景声录制合成服务&price=99999" class="buy">购买</a></td>
+                    </tr> -->
+                    <!-- <tr>
+                        <td><span class="title">全景声制作后期服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=全景声制作后期服务&price=99999" class="buy">购买</a></td>
+                    </tr> -->
+                   <!--  <tr>
+                        <td><span class="title">全景直播服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=全景直播服务&price=99999" class="buy">购买</a></td>
+                    </tr> -->
+                  <!--   <tr>
+                        <td><span class="title">Audio SDK(全景声制作SDK)</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=Audio SDK(全景声制作SDK)&price=99999" class="buy">购买</a></td>
+                    </tr> -->
+                    <tr>
+                        <td><span class="title">视频拼接服务软件</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=视频拼接服务软件&price=99999" class="buy">购买</a></td>
+                    </tr>
+                    <tr>
+                        <td><span class="title">全景视频、音频播放技术服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=全景视频、音频播放技术服务&price=99999" class="buy">购买</a></td>
+                    </tr>
+                    <!-- <tr>
+                        <td><span class="title">网页端全景视频播放技术服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=网页端全景视频播放技术服务&price=99999" class="buy">购买</a></td>
+                    </tr> -->
+                    <tr>
+                        <td><span class="title">存储和播放服务</span></td>
+                        <td><span class="price">面议</span></td>
+                        <td><a href="{:U('home/user/address')}?ordername=存储和播放服务&price=99999" class="buy">购买</a></td>
+                    </tr>
+                </table>
+            </div>
+
+        </article>
+    </div>
+</div>
+</div>
+<include file="Public/footer" />
+<script>
+    $(".buy").click(function(){
+        return confirm('请联系官方确认价格后在“账单”页进行购买');
+    });
+</script>

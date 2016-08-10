@@ -1,0 +1,129 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+
+
+
+
+<div id="main">
+	<div class="mainInc">
+		<div class="mainIncA">
+			<div class="mainIncB">
+				<div class="pageInfo">
+					<h1>视频管理中心</h1>
+				</div>
+				
+				<form action="__ROOT__/Admin/Video/index" method="get">
+				<div class="searchCondition">
+					<span> <strong>视频标题</strong> <input type="text"
+						placeholder="视频标题" class="texter" name="search" value="{$search}" />
+					</span> <span> 
+					<strong>状态</strong> <select name="status">
+							<option value="1" <if condition="$status == 1">selected</if>>未合成</option>
+							<option value="2" <if condition="$status == 2">selected</if>>合成中</option>
+							<option value="3" <if condition="$status == 3">selected</if>>已合成</option>
+							<option value="-1" <if condition="$status == -1">selected</if>>全部</option>
+					</select>
+					</span>
+					<button type="submit">
+						<span class="search">&nbsp;</span>搜 索
+					</button>
+					<button type="reset">
+						<span class="reset">&nbsp;</span>重 置
+					</button>
+				</div>
+				</form>
+				<div class="msgContent">
+					<div class="listTable">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<thead>
+								<tr>
+									<!-- <th><input type="checkbox" title="全选" /></th> -->
+									<td>序号</td>
+									<td>用户名</td>
+									<td>音视频标题</td>
+									<td>音视频描述</td>
+									<td>视频总数</td>
+									<td>音频总数</td>
+									<td>联系方式</td>
+									<td>上传时间</td>									
+									<td>状态</td>
+									<td>操作</td>
+								</tr>
+							</thead>
+							<tbody>
+
+								<foreach name="list" item="video">
+								<tr>
+									<!-- <th><input type="checkbox" title="选择" /></th> -->
+									<td>{$video.id}</td>
+									<td>{$video.user_info.mobile}</td>
+									<td>{$video.curr_video_title}</td>
+									<td>{$video.curr_video_desc}</td>
+									<td>{$video.video_cnt}</td>
+									<td>{$video.audio_cnt}</td>
+									
+									<td>
+										<if condition="$video.user_info.mobile neq  null">{$video.user_info.mobile}</if> 
+										<!-- <if condition="$video.user_info.email neq  null">&nbsp;&nbsp;{$video.user_info.email}</if> -->
+									</td>
+									<td>{$video.create_time|date='Y-m-d H:m:s',###}</td>
+									<td>
+										<if condition="$video.status == 1">未合成</if> 
+									    <if condition="$video.status == 2">合成中</if>
+									    <if condition="$video.status == 3">已完成</if>
+									</td>
+									<td>
+										<input name="operate" type="button" class="buttoner"
+										value="查看详情" onClick="goDatile('{$video.video_uuid}')">
+										
+										<if condition="$video.status != 1">
+											<input name="operate" type="button" class="buttoner"
+											value="上传合成视频" onClick="goTranslate('{$video.video_uuid}')">
+										</if> 
+									</td>
+								</tr>
+								</foreach>
+							</tbody>
+						</table>
+					</div>
+					<div class="tools">
+						<p class="pageMark">
+						
+								<div class="pageMark">
+									{$show}
+						            <!-- <a href="#" class="goHead">首页</a>
+						            <a href="#" class="prev">&lt;</a>
+						            <a href="#" class="pagers">1</a>
+						            <a href="#" class="pagers">2</a>
+						            <a href="#" class="pagers">3</a>
+						            <a href="#" class="pagers">4</a>
+						            <a href="#" class="next">&gt;</a>
+						            <a href="#" class="goEnd">尾页</a> -->
+						        </div>
+							<!-- <button class="back">&lt;</button>
+							<input type="text" class="num" size="3" value="5" /><span>/10</span>
+							<button class="sure">Go</button>
+							<button class="forward">&gt;</button> -->
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	function goDatile(id){
+		var url = "__ROOT__/Admin/Video/datile?uuid=" + id ;
+		window.location.href=url; 
+	}
+	
+	function goTranslate(id){
+		var url = "__ROOT__/Admin/Video/goTranslate?uuid=" + id ;
+		window.location.href=url; 
+	}
+	
+	
+</script>
+</block>

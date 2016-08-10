@@ -1,0 +1,154 @@
+<include file="Public/header" />
+<body>
+	<div class="userPageTitle">
+		<div class="inc">
+			<h1 class="pageName">内容孵化</h1>
+		</div>
+		<div class="pageTitleBg"></div>
+	</div>
+	<div class="userPageContent inc ">
+		<section id="useStep">
+		  <div class="inc">
+		    <h2>虚拟现实内容制作，只需三步</h2>
+		    <p>
+		      <a href="{:U('home/index/login')}" class="register">
+		        <span></span>
+		        <strong>登录/注册</strong>
+		      </a>
+		      <a href="{:U('home/index/login')}" class="register mobile">
+		        <span></span>
+		        <strong>登录/注册</strong>
+		        <i></i>
+		      </a>
+		      <em class="arrow"></em>
+		      <a href="{:U('home/video/golist?status=3')}" class="upload">
+		        <span></span>
+		        <strong>上传分镜头<br>音视频</strong>
+		      </a>
+		      <a href="#" class="upload mobile">
+		        <span></span>
+		        <strong>上传分镜头音视频</strong>
+		        <i></i>
+		      </a>
+		      <em class="arrow"></em>
+		      <a href="#"  class="download">
+		        <span></span>
+		        <strong>下载全景成片</strong>
+		      </a>
+		      <a href="#"  class="download mobile">
+		        <span></span>
+		        <strong>下载全景成片</strong>
+		        <i></i>
+		      </a>
+		    </p>
+		  </div>
+		</section>
+
+
+
+
+	</div>
+
+	<script type="text/javascript">
+			function dodel(id){
+
+				 $.ajax({
+						type: "GET",
+						url: "__ROOT__/Home/Video/doDel",
+						async: false,
+						data: {id:id},
+						dataType: "json",
+						success:function (data){
+							var obj = eval(data);
+							  if(obj.success){
+								 // alert("删除成功");
+								  $("#" + id).remove();
+							  }else{
+								  alert("删除失败");
+							  }
+						  }
+				});
+
+			}
+
+
+
+			function edit(id){
+				var title = $("#title").val();
+				var desc = $("#desc").val();
+
+				var curr_title = $("#video_title_" + id).html();
+				var curr_desc = $("#video_desc_" + id).html();
+				if((curr_title == title) && (curr_desc == desc)){
+					return;
+				}
+
+
+				 $.ajax({
+						type: "POST",
+						url: "__ROOT__/Home/Video/doedit",
+						async: false,
+						data: {id:id,title:title,desc:desc},
+						dataType: "json",
+						success:function (data){
+							var obj = eval(data);
+							  if(obj.success){
+								 alert(obj.msg);
+								 $("#video_title_" + id).html(title);
+								 $("#video_desc_" + id).html(desc);
+
+							  }else{
+								  alert(obj.msg);
+							  }
+						  }
+					});
+			}
+
+
+		</script>
+
+	<article class="artModel videoDescription">
+		<h1></h1>
+		<p>
+			<strong>标题</strong> <input type="text" class="searchInput" id="title">
+		</p>
+		<p>
+			<strong>描述</strong>
+			<textarea class="searchInput textareas" id="desc"></textarea>
+		</p>
+		<p class="buttonInc">
+			<a href="javascript:;" class="buttons yellowBtn sure"
+				lang="home_desc" video_id="" id="home_submit">确定</a> <a
+				href="javascript:;" class="buttons blackBtn closeBtn">取消</a>
+		</p>
+	</article>
+
+
+
+
+	<article class="artModel videoDelete">
+		<h1>
+			确定要删除<strong></strong>视频？
+		</h1>
+		<p class="buttonInc">
+			<a href="javascript:;" class="buttons yellowBtn sure">确定</a> <a
+				href="javascript:;" class="buttons blackBtn closeBtn">取消</a>
+		</p>
+	</article>
+
+	<article class="artModel videoDown">
+		<h1>
+			<strong></strong>
+		</h1>
+		<p>
+			<strong>视频时常</strong> <em class='timeLong'></em>
+		</p>
+		<p>
+			<strong>实际费用</strong> <em class='price'></em>
+		</p>
+		<p class="buttonInc">
+			<a href="javascript:;" class="buttons yellowBtn sure">使用支付宝支付</a> <a
+				href="javascript:;" class="buttons blackBtn closeBtn">取消</a>
+		</p>
+	</article>
+	<include file="Public/footer" />

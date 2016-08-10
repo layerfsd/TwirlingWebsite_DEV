@@ -1,0 +1,57 @@
+<krpano>
+	
+	<action name="startup" autorun="onstart">
+		if(device.panovideosupport == false,
+			error('Sorry, but panoramic videos are not supported by your current browser!');
+		  ,
+			loadscene(videopano);
+		  );
+	</action>
+
+	<scene name="videopano" title="Twirling VR Player">
+
+		<!-- include the videoplayer interface / skin (with VR support) -->
+		<include url="/Public/videointerface/skin/videointerface.xml" />
+
+		<!-- include the videoplayer plugin -->
+		<plugin name="video"
+		        url.html5="/Public/viewer/plugins/videoplayer.js"
+		        url.flash="/Public/viewer/plugins/videoplayer.swf"
+		        pausedonstart="true"
+		        loop="true"
+		        volume="1.0"
+		        onloaded="add_video_sources();"
+		        />
+
+		<!-- use the videoplayer plugin as panoramic image source -->
+		<image>
+			<sphere url="plugin:video" />
+		</image>
+
+		<!-- set the default view -->
+		<view hlookat="0" vlookat="0" fovtype="DFOV" fov="130" fovmin="75" fovmax="150" distortion="0.0" />
+
+		<!-- add the video sources and play the video -->
+		<action name="add_video_sources">
+		<!--格式备份
+			-->
+			videointerface_addsource('1024x512', 'http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/down_2016-06-01/48e7dd8f-0ca4-1557-b01c-57282c73f3cf_666_1464715005_666_AudioDemo960X540_4MB.mp4||http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/down_2016-06-01/48e7dd8f-0ca4-1557-b01c-57282c73f3cf_666_1464715005_666_AudioDemo.mp3', 'http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/down_2016-06-01/48e7dd8f-0ca4-1557-b01c-57282c73f3cf_666_1464715005_666_AudioDemo960.jpg');
+			videointerface_addsource('1920x960', 'http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/down_2016-06-01/48e7dd8f-0ca4-1557-b01c-57282c73f3cf_666_1464715005_666_AudioDemo960X540_4MB.mp4||http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/down_2016-06-01/48e7dd8f-0ca4-1557-b01c-57282c73f3cf_666_1464715005_666_AudioDemo.mp3', 'http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/down_2016-06-01/48e7dd8f-0ca4-1557-b01c-57282c73f3cf_666_1464715005_666_AudioDemo960.jpg');
+			
+		
+		
+			<!--动态输出配置代码-->
+			<?php //echo $v_1024x512;?>
+			<?php //echo $v_1920x960;?>
+			
+			if(device.ios,
+				<!-- iOS Safari has a very slow 'video-to-webgl-texture' transfer, therefore use a low-res video by default -->
+				videointerface_play('1024x512');
+			  ,
+				videointerface_play('1920x960');
+			  );
+		</action>
+
+	</scene>
+
+</krpano>

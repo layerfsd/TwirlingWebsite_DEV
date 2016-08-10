@@ -1,0 +1,206 @@
+
+<extend name="Public/base" />
+<block name="body"> <include file="Public:left" />
+
+<div id="main">
+	<div class="mainInc">
+		<div class="mainIncA">
+			<div class="mainIncB">
+				<div class="msgContent">
+					<form id="myForm" action="__ROOT__/Admin/User/doUpdate"
+						method="post">
+						<h3 class="tableTitle">用户信息</h3>
+						<div class="msgTable">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<th width="14%">用户名</th>
+									<td width="43%">
+										<p class="formTexter checkFun" lang="checkuser">
+											<q class="radioInput"><input type="text"
+												value="{$user.user_name}" name="user_name"
+												disabled="disabled" />
+												<input type="hidden" name="id" value="{$user.id}" >
+												</q>
+										</p>
+									</td>
+									<td width="43%"><p class="validator"></p></td>
+								</tr>
+
+								<tr>
+									<th>密码</th>
+									<td>
+										<p class="formTexter checkFun" lang="checkpwd">
+											<q class="radioInput"><input type="password"
+												value="******" name="user_pwd" /></q>
+										</p>
+									</td>
+									<td><p class="validator"></p></td>
+								</tr>
+
+
+								<tr>
+									<th width="14%">邮箱</th>
+									<td width="43%">
+										<p class="formTexter checkFun" lang="checkmail">
+											<q class="radioInput"> <input type="text"
+												value="{$user.email}" name="email" /></q>
+										</p>
+									</td>
+									<td width="43%"><p class="validator"></p></td>
+								</tr>
+								<tr>
+									<th width="14%">真实姓名</th>
+									<td width="43%">
+										<p class="formTexter " lang="">
+											<q class="radioInput"><input type="text"
+												value="{$user.nick_name}" name="nick_name" /></q>
+										</p>
+									</td>
+									<td width="43%"><p class="validator"></p></td>
+								</tr>
+
+								<tr>
+									<th width="14%">地址</th>
+									<td width="43%">
+										<p class="formTexter " lang="">
+											<q class="radioInput"><input type="text"
+												value="{$user.address}" name="address" /></q>
+										</p>
+									</td>
+									<td width="43%"><p class="validator"></p></td>
+								</tr>
+								<tr>
+									<th width="14%">手机号</th>
+									<td width="43%">
+										<p class="formTexter checkFun" lang="checkmobile">
+											<q class="radioInput"><input type="text"
+												value="{$user.mobile}" name="mobile" /></q>
+										</p>
+									</td>
+									<td width="43%"><p class="validator"></p></td>
+								</tr>
+								<tr>
+									<th width="14%">自我简介</th>
+									<td width="43%">
+										<p class="formTexter " lang="">
+											<q class="radioInput"><input type="text"
+												value="{$user.introduction}" name="introduction" /></q>
+										</p>
+									</td>
+									<td width="43%"><p class="validator"></p></td>
+								</tr>
+							</table>
+						</div>
+						<p class="tabelBtn">
+							<button type="button" class="modelSubmit submitor" lang="myFn">提
+								交</button>
+							<button type="reset">重 置</button>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script type="text/javascript">
+function myFn(){
+	//ALGOBLU.statusMsg("修改为正确");
+	document.getElementById("myForm").submit();
+}
+
+
+VALIDATOR.form.checkuser = function (arg)
+{
+	
+	MYWARN = "用户名不可修改";
+	var theValue = arg.find("input").val();
+	if( theValue != "")
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+VALIDATOR.form.checkpwd = function (arg)
+{
+	MYWARN = "密码修改规则未定";
+	return true;
+}
+VALIDATOR.form.checkmail = function (arg)
+{
+	MYWARN = "请输入有效的EMAIL地址";
+	var theValue = arg.find("input").val();
+	var falg = false;
+	if( theValue != "")
+	{
+		var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+         if(!myreg.test(theValue))
+         {
+             return false;
+         }else{
+       	 	$.ajax({
+					type: "GET",
+					url: "__ROOT__/Admin/User/check",
+					async: false,
+					data: {type:2, val:theValue,id:{$user.id}},
+					  dataType: "json",
+					  success:function (data){
+						  if(!data.success){
+							  MYWARN = "EMAIL已被注册";
+							  falg = false;
+						  }else{
+							  falg = true;
+						  }
+					  }
+				});
+         }
+         return falg;
+	}
+	else
+	{
+		return false;
+	}
+}
+VALIDATOR.form.checkmobile = function (arg)
+{
+	MYWARN = "请输入有效的手机号";
+	var theValue = arg.find("input").val();
+	var flag = false;
+	if( theValue != "")
+	{
+		var myreg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+         if(!myreg.test(theValue))
+         {
+             return false;
+         }else{
+        	 $.ajax({
+					type: "GET",
+					url: "__ROOT__/Admin/User/check",
+					async: false,
+					data: {type:1, val:theValue,id:{$user.id}},
+					dataType: "json",
+					success:function (data){
+						  if(!data.success){
+							  MYWARN = "手机号已被注册";
+							  flag =  false;
+						  }else{
+							  flag = true;
+						  }
+					  }
+				});
+         }
+         return flag;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+</script> </block>
