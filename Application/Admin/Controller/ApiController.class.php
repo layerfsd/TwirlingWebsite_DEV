@@ -2,7 +2,7 @@
 /**
  * 总是在 REQUST 操作之后进行 GET 的操作。
  */
-namespace Home\Controller;
+namespace Admin\Controller;
 
 use Think\Controller;
 

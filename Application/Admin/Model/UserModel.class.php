@@ -3,7 +3,6 @@ namespace Admin\Model;
 
 use Think\Model\RelationModel;
 
-define("ENCODE_KEY", "wifi!@#$"); //加密密钥
 class UserModel extends RelationModel
 {
     protected $_validate = array(

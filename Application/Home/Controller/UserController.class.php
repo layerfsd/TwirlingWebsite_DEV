@@ -128,13 +128,12 @@ class UserController extends Controller
             'order_user_id' => session('tl_userid'),
             'address' => $_POST['address'],
             'address_mobile' => $_POST['address_mobile'],
+            'tick_message' => $_POST['tick_message'],
             'create_time' => time(),
             'type' => 2,
             'status' => 0
-
         );
         $r = $order->add($data);
-
 
         //生成订单记录
 
