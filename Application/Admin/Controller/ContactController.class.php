@@ -14,7 +14,6 @@ class ContactController extends BaseController {
 // 	    $status = $_GET ['status']; // 状态
 	    import ( 'ORG.Util.Page' ); // 导入分页类
 	    $map = array (
-	        	
 	    );
 	    
 	    if ($search != null && $search != '') {
@@ -26,7 +25,6 @@ class ContactController extends BaseController {
 	        $Page->parameter .= "&search=" . urlencode ( $search );
 	    }
 	    
-	    
 	    $cnt = M ( 'contact' )->where ( $map )->count ();
 	    $this->cnt = $cnt;
 	    $Page = new Page ( $cnt, 10 ); // 实例化分页类 传入总记录数和每页显示的记录数
@@ -34,13 +32,9 @@ class ContactController extends BaseController {
 	    $orders = M ( 'contact' )->where ( $map )->order ( array (
 	        'ctime' => 'desc'
 	    ) )->limit ( $Page->firstRow . ',' . $Page->listRows )->select ();
-	    
-	    
+
 	    $this->list = $orders;
 	    $this->show = $show;
 	    $this->display ();
-	    
 	}
-	
-	
 }

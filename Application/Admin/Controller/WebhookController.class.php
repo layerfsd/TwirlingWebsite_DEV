@@ -13,7 +13,7 @@ class WebhookController
      */
     public function actionGit()
     {
-        $secret = '密钥';
+        $secret = 'twirling4869';
         //获取http 头
         $headers = array();
         //Apache服务器才支持getallheaders函数
