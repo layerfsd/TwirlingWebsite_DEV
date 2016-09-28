@@ -5,17 +5,18 @@ use Think\Model\RelationModel;
 
 class UserModel extends RelationModel
 {
-    protected $_validate = array(
-        array('username', 'require', '用户名不能为空'),
-        array('email', 'require', '邮箱地址不能为空'),
-        array('password', 'require', '密码不能为空'),
-        array('username', '', '用户名已经存在', 0, 'unique', 1), // 在新增的时候验证name字段是否唯一
-        array('email', 'email', '邮箱地址不合法'), // 在新增的时候验证email字段是否合法和唯一
-        array('email', '', '邮箱地址已经存在', 0, 'unique', 1)
-    );
-    public $_auto = array(
-        array('password', 'md5', 3, 'function')    //对password字段在新增和编辑的时候使md5函数处理
-    );
+    public function checkIsVip($mobile = 'null', $openid = 'null')
+    {
+        $result = $this->where("mobile = " . $mobile)->select();
+        if ($result) {
+            return $result[0]['is_vip'];
+        }
+        $result = $this->where("openid = '" . $openid . "'")->select();
+        if ($result) {
+            return $result[0]['is_vip'];
+        }
+        return null;
+    }
 
     public function getUsernameByUid($uid)
     {
@@ -35,6 +36,14 @@ class UserModel extends RelationModel
         } else {
             return false;
         }
+    }
+
+    public function checkOpenId($openid = null)
+    {
+        $Model = M();
+        $sql = "SELECT b.`id` ID, b.`openid` OpenID, b.`nick_name` NickName, b.`mobile` Mobile, b.`is_vip` IsVip FROM `twirling`.`tl_user` b WHERE b.`openid`= '" . $openid . "'";
+        $result = $Model->query($sql);
+        return $result ? $result[0] : false;
     }
 
     public function createToken($result)

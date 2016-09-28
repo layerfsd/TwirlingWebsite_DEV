@@ -44,4 +44,29 @@ class LoginController extends Controller
             exit;
         }
     }
+
+    public function loginWX($openid = null)
+    {
+        $User = D('user');
+        if ($openid == null) {
+            $array['status'] = -1;
+            $array['msg'] = "openid不能为空";
+            echo json_encode($array, JSON_UNESCAPED_SLASHES);    //JSON_UNESCAPED_SLASHES使url不转义
+            exit;
+        }
+        if ($User->checkOpenId($openid)) {
+            //更新登录时间和ip
+            $array['status'] = 200;
+            $array['msg'] = "登录成功";
+            $array['data'] = $User->checkOpenId($openid);
+            echo json_encode($array, JSON_UNESCAPED_SLASHES);
+            exit;
+        } else {
+            $array['status'] = 400;
+            $array['msg'] = "手机或密码错误";
+            $array['data'] = "";
+            echo json_encode($array, JSON_UNESCAPED_SLASHES);
+            exit;
+        }
+    }
 }

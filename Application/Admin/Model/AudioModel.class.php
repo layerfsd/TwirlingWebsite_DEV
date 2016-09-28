@@ -9,9 +9,9 @@ use Think\Model\RelationModel;
  * Date: 2016/8/15 0015
  * Time: 上午 11:37
  */
-class LiveModel extends RelationModel
+class AudioModel extends RelationModel
 {
-    public function selectLive()
+    public function selectAudio()
     {
         $result = $this->select();
         if ($result != NULL) {

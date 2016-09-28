@@ -11,21 +11,34 @@ use Think\Controller;
  */
 class AppVideoController extends Controller
 {
-    public function makelist()
+    public function makelist($mobile = 'null', $openid = 'null')
     {
+        if ($mobile == null) {
+            $mobile = 'null';
+        }
         $Live = D('app_movies');
-        if ($Live->selectLive()) {
+        $User = D('user');
+        //
+        if ($User->checkIsVip($mobile, $openid)) {
             $array['status'] = 200;
             $array['msg'] = "查询成功";
-            $array['data'] = $Live->selectLive();
-            echo json_encode($array, JSON_UNESCAPED_SLASHES);
-            exit;
-        } else {
-            $array['status'] = 400;
-            $array['msg'] = "查询失败";
-            $array['data'] = "";
+            $array['data'] = $Live->selectVip();
             echo json_encode($array, JSON_UNESCAPED_SLASHES);
             exit;
         }
+        //
+        if ($Live->selectLive($mobile, $openid)) {
+            $array['status'] = 200;
+            $array['msg'] = "查询成功";
+            $array['data'] = $Live->selectLive($mobile, $openid);
+            echo json_encode($array, JSON_UNESCAPED_SLASHES);
+            exit;
+        }
+        $array['status'] = 400;
+        $array['msg'] = "查询失败";
+        $array['data'] = "";
+        echo json_encode($array, JSON_UNESCAPED_SLASHES);
+        exit;
     }
+
 }

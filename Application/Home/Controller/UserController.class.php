@@ -103,12 +103,11 @@ class UserController extends Controller
         $this->assign('ordername', $ordername);
         $this->assign('price', $price);
         $this->display();
-
     }
 
+    //确认订单
     public function productbuy()
-    { //确认订单
-
+    {
         //生成订单号
         $order_no = date('Ymd', time());
         $rand = $this->randString();
@@ -136,7 +135,6 @@ class UserController extends Controller
         $r = $order->add($data);
 
         //生成订单记录
-
         $this->assign('ordername', $ordername);
         $this->assign('price', $price);
         $this->assign('address', $_POST['address']);

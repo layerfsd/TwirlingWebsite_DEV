@@ -32,7 +32,7 @@ class VideodemoController extends Controller {
     function getvideoxml(){ //视频播放xml
 
         //获取视频信息
-        $video_uuid = $_GET['video_uuid'];
+        $video_uuid = $_GET['video_uuid'];``
         //echo $video_uuid;die;
         $video_translate = M('video_translate');
 
