@@ -1,0 +1,227 @@
+<script src="http://static.twirlingvr.com/yun/website/script/jQuery19.js"></script>
+<script src="__PUBLIC__/uploadify/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/uploadify/bootstrap.min.css">
+<script src="__PUBLIC__/uploadify/jquery.validate.js"></script>
+<!--  <script href="__PUBLIC__/Home/artDialog/artDialog.js"></script> -->
+
+<script>
+    $(function () {
+
+    })
+    //   $(function(){
+
+    // window.onload=function(){
+
+    //   var d = dialog({
+    //     title:'让世界听到你的声音',
+    //     content: '你即将可以上传自己的作品！'
+    // });
+    // d.show();
+    // setTimeout(function () {
+    //     d.close().remove();
+    // }, 5000);
+    // $('#body').model();
+
+    //   }
+    // })
+    //    window.onload(function(){
+    //       var d = dialog({
+    //       content: '对话框将在两秒内关闭'
+    //   });
+    //   d.show();
+    //   setTimeout(function () {
+    //       d.close().remove();
+    //   }, 2000);
+    // })
+
+
+</script>
+<style>
+    /*#body{
+      z-index:-1;
+    }*/
+    input {
+        margin: 10px 0 0 0;
+    }
+
+    .video-title {
+        /* border:1px solid blue;*/
+        font-family: "微软雅黑";
+        font-size: 24px;
+        margin: 40px 0px 30px 70px;
+    }
+
+    .col-md-5 > label {
+        color: #F5744C;
+    }
+</style>
+<include file="Public/header"/>
+
+<div id="body" class="container" style="background:#EDEDF0">
+    <div class="video-title" style="border-bottom:1px solid silver;height:35px">
+        <h2>音频信息</h2>
+    </div>
+
+    <div class="row">
+
+        <form class="form-horizontal" id="form-validate">
+            <div class="form-group">
+                <div class="col-md-offset-3  col-md-6 col-sm-6 control-label">
+                    <label style="float:left">标题&nbsp;&nbsp;&nbsp;<span
+                            style="color:#337AB7;font-size:11px">* 不可超过30个字符</span></label>
+                </div>
+                <div class="col-md-offset-3 col-md-5 col-sm-5">
+                    <input name="upload_title" placeholder="必填" type="text" class="form-control" id="title"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3  col-md-6 col-sm-6 control-label">
+                    <label style="float:left">简介</label>
+                </div>
+                <div class="col-md-offset-3 col-md-5 col-sm-5">
+                    <textarea placeholder="可选填" class="form-control" rows="3" id="content"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-6 col-sm-6 control-label">
+                    <label style="float:left">音频封面&nbsp;&nbsp;<span style="color:#337AB7;font-size:11px">* 上传图片格式仅限: jpg/png</span></label>
+                </div>
+                <div class="col-md-offset-3 col-md-5 col-sm-5">
+                    <input name="upload_cover" type="file" style="margin:5px 0 0 0"
+                           accept="image/jpg,image/png,image/gif" id="coverphoto" onchange="previewImage(this)"></input>
+
+                    <div id="img-src" style="width:200px;height:200px;margin:5px 0px 0px 0px">
+                        <img id="imaghead" class="img-responsive" id="img-show"
+                             src='__PUBLIC__/Home/images/upload.png'/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3  col-md-6 col-sm-6 control-label">
+                    <label style="float:left">上传音频&nbsp;&nbsp;<span style="color:#337AB7;font-size:11px">* 上传文件
+            格式仅限: wav</span></label>
+                </div>
+                <div class="col-md-offset-3  col-md-5 col-sm-5">
+                    <input name="upload_file" type="file" style="margin:5px 0 0 0" id="audioPath" accept="audio/wav"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12 col-ms-12 text-center">
+                    <a href="">
+                        <button type="submit" id="sure" class="btn btn-primary"
+                                style="width:200px;margin:10px 0 10px 0">确定上传
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include file="Public/footer"/>
+<script src="__PUBLIC__/Home/script/jQuery19.js"></script>
+<script src="__PUBLIC__/uploadify/jquery.validate.js"></script>
+<script>
+    $(document).ready(function () {
+        // $("input").focus(function(){})
+
+
+        // $('#sure').click(function(){
+        // $('#form-validate').validate({
+
+        // })
+        $('#form-validate').validate({
+            onsubmit: true,
+            onfocusout: false,
+            rules: {
+                upload_title: {required: true, maxlength: 30},
+                // upload_cover:{required:true},
+                upload_file: {required: true},
+            },
+            messages: {
+                upload_title: {required: '请填写标题!', maxlength: '请输入少于30个字符'},
+                // upload_cover:{required:''},
+                upload_file: {required: '请上传音频文件！'},
+            },
+            submitHandler: function (form) {
+                // $(form).ajaxSubmit();
+                $.ajax({
+                    url: "http://yun-dev.twirlingvr.com/Admin/Audio/insert2DB",
+                    type: 'POST',
+                    data: {
+                        'title': $('#title').val(),
+                        'content': $('#content').val(),
+                        'coverphoto': $('#coverphoto').val(),
+                        'audioPath': $('#audioPath').val(),
+                    },
+                    success: function (result) {
+                        // console.log(result)
+                        alert('您的作品已经上传,待审核成功后即可看到！')
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            },
+            // invaldHandler:function(form,validator){
+            //  return false;
+            // }
+        })
+    })
+    // })
+    //图片上传预览    IE是用了滤镜。
+    function previewImage(file) {
+        var MAXWIDTH = 260;
+        var MAXHEIGHT = 180;
+        var div = document.getElementById('img-src');
+        if (file.files && file.files[0]) {
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.onload = function () {
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+                img.width = rect.width;
+                img.height = rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+                img.style.marginTop = rect.top + 'px';
+            }
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                img.src = evt.target.result;
+            }
+            reader.readAsDataURL(file.files[0]);
+        }
+        else //兼容IE
+        {
+            var sFilter = 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status = ('rect:' + rect.top + ',' + rect.left + ',' + rect.width + ',' + rect.height);
+            div.innerHTML = "<div id=divhead style='width:" + rect.width + "px;height:" + rect.height + "px;margin-top:" + rect.top + "px;" + sFilter + src + "\"'></div>";
+        }
+    }
+
+    function clacImgZoomParam(maxWidth, maxHeight, width, height) {
+        var param = {top: 0, left: 0, width: width, height: height};
+        if (width > maxWidth || height > maxHeight) {
+            rateWidth = width / maxWidth;
+            rateHeight = height / maxHeight;
+
+            if (rateWidth > rateHeight) {
+                param.width = maxWidth;
+                param.height = Math.round(height / rateWidth);
+            } else {
+                param.width = Math.round(width / rateHeight);
+                param.height = maxHeight;
+            }
+        }
+
+        param.left = Math.round((maxWidth - param.width) / 2);
+        param.top = Math.round((maxHeight - param.height) / 2);
+        return param;
+    }
+</script>

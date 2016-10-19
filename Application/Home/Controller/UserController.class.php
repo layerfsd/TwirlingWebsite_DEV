@@ -103,11 +103,12 @@ class UserController extends Controller
         $this->assign('ordername', $ordername);
         $this->assign('price', $price);
         $this->display();
+
     }
 
-    //确认订单
     public function productbuy()
-    {
+    { //确认订单
+
         //生成订单号
         $order_no = date('Ymd', time());
         $rand = $this->randString();
@@ -135,6 +136,7 @@ class UserController extends Controller
         $r = $order->add($data);
 
         //生成订单记录
+
         $this->assign('ordername', $ordername);
         $this->assign('price', $price);
         $this->assign('address', $_POST['address']);
@@ -179,21 +181,25 @@ class UserController extends Controller
             $this->error("您还不是授权用户", '', 3);
             die;
         }
+         if ($_GET['type'] == 'twirling') {
+            header("Location: http://down-load.oss-cn-shanghai.aliyuncs.com/Twirling720/Twirling720.zip");
+            die;
+        }
 
         if ($_GET['type'] == 'Android') {
-            header("Location: http://down-load.oss-cn-shanghai.aliyuncs.com/AudioSDK/Twirling%20Audio%20SDK%201.2%20for%20android.rar");
+            header("Location: http://down-load.oss-cn-shanghai.aliyuncs.com/AudioSDK1.4/android.rar");
             die;
         }
         if ($_GET['type'] == 'ios') {
-            header("Location: http://down-load.oss-cn-shanghai.aliyuncs.com/AudioSDK/Twirling%20Audio%20SDK%201.2%20for%20iOS.rar");
+            header("Location: http://down-load.oss-cn-shanghai.aliyuncs.com/AudioSDK1.4/ios.rar");
             die;
         }
         if ($_GET['type'] == 'Windows') {
-            header("Location: http://down-load.oss-cn-shanghai.aliyuncs.com/AudioSDK/Twirling%20Audio%20SDK%201.2%20for%20windows.rar");
+            header("Location: http://down-load.oss-cn-shanghai.aliyuncs.com/AudioSDK1.4/win.rar");
             die;
         }
         if ($_GET['type'] == 'Unity') {
-            header("Location: http://down-load.oss-cn-shanghai.aliyuncs.com/AudioSDK/Twirling%20Audio%20SDK%201.2%20for%20unity3d.rar");
+            header("Location: http://down-load.oss-cn-shanghai.aliyuncs.com/AudioSDK1.4/unity3d.rar");
             die;
         }
     }

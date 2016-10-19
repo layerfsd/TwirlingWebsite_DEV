@@ -22,7 +22,67 @@ class AudioController extends Controller
         $data['content'] = $_POST['content'];
         $data['tag'] = $_POST['tag'];
         $insertId = $Audio->add($data);
+        if ($insertId) {
+            $array['status'] = 200;
+            $array['msg'] = "数据上传成功";
+            $data['id'] = $insertId;
+            $array['data'] = $data;
+            echo json_encode($array, JSON_UNESCAPED_SLASHES);
+        }else{
+            $array['status'] = 400;
+            $array['msg'] = "数据上传失败";
+            $array['data'] = "";
+        }
 //        dump($data);
-//        dump($insertId);
+    }
+
+    /*
+   * 文件上传处理
+   */
+    public function get(){
+        $id= C("UPLOAD_SITEIMG_OSS")["driverConfig"]['AccessKeyId'];
+        $key= C("UPLOAD_SITEIMG_OSS")["driverConfig"]['AccessKeySecret'];
+        $host = C('UPLOAD_SITEIMG_OSS')['host'];
+        $callbackUrl = C("UPLOAD_SITEIMG_OSS")["callbackUrl"];
+        $callbackHost = C("WEB_HOST");
+        $callback_body = '{"callbackUrl":"'.$callbackUrl.'",
+                                        "callbackHost":"'.$callbackHost.'",
+                                        "callbackBody":"filename=${object}",
+                                        "callbackBodyType":"application/x-www-form-urlencoded"}';
+
+        $base64_callback_body = base64_encode($callback_body);
+        $now = time();
+        $expire = 30; //设置该policy超时时间是10s. 即这个policy过了这个有效时间，将不能访问
+        $end = $now + $expire;
+        $expiration = $this->gmt_iso8601($end);
+
+        $oss_sdk_service = new sdk($id, $key, $host);
+        $dir = "up_" . date("Y-m-d") . "/" ;
+
+        //最大文件大小.用户可以自己设置
+        $condition = array(0=>'content-length-range', 1=>0, 2=>1048576000);
+        $conditions[] = $condition;
+
+        //表示用户上传的数据,必须是以$dir开始, 不然上传会失败,这一步不是必须项,只是为了安全起见,防止用户通过policy上传到别人的目录
+        $start = array(0=>'starts-with', 1=>'$key', 2=>$dir);
+        $conditions[] = $start;
+
+
+        $arr = array('expiration'=>$expiration,'conditions'=>$conditions);
+        $policy = json_encode($arr);
+        $base64_policy = base64_encode($policy);
+        $string_to_sign = $base64_policy;
+        $signature = base64_encode(hash_hmac('sha1', $string_to_sign, $key, true));
+
+        $response = array();
+        $response['accessid'] = $id;
+        $response['host'] = $host;
+        $response['policy'] = $base64_policy;
+        $response['signature'] = $signature;
+        $response['expire'] = $end;
+        $response['callback'] = $base64_callback_body;
+        //这个参数是设置用户上传指定的前缀
+        $response['dir'] = $dir;
+        echo json_encode($response);
     }
 }
