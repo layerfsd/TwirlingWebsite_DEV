@@ -408,8 +408,9 @@ class VideoController extends Controller
         return $url;
     }
 
+    //视频播放xml
     function getvideoxml()
-    { //视频播放xml
+    {
 
         //获取视频信息
         $video_uuid = $_GET['video_uuid'];

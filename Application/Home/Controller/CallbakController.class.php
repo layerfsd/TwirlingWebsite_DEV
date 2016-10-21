@@ -63,10 +63,9 @@ class CallbakController extends Controller {
 		//写日志
 		file_put_contents('thenewlog.log',$code."\n",FILE_APPEND);
 		$urls = C('UPLOAD_SITEIMG_OSS')['host']."/" .$date . "/" . urlencode($res [1]);
-		$sql = "insert into  tl_video_desc (status,video_type,aliyun_url,uuid,file_name,create_time)  values(1," . $type . ",'" . $urls . "','" . $uuid . "','" . $file_name . "' , ".time().")";
-		
 		$Model = M ();
-		$Model->execute ( $sql );
+        $sql = "insert into  tl_video_desc (status,video_type,aliyun_url,uuid,file_name,create_time)  values(1," . $type . ",'" . $urls . "','" . $uuid . "','" . $file_name . "' , ".time().")";
+        $Model->execute ( $sql );
 		$curl = "http://".C("WEB_HOST")."/plugin/aliyun-api/index.php?type=1&name=" . urlencode($res [1]) . "&uuid=" . $uuid . "&file_name=" . urlencode($file_name) . "&day=" . $date;
 		$ch = file_get_contents($curl);
 // 		$Model->execute ( "insert into test (a) values('".$curl."')" );
@@ -140,13 +139,10 @@ class CallbakController extends Controller {
 		$date = $file_arr [1];
 		
 		$urls = C('UPLOAD_SITEIMG_OSS')['host']."/" .$date . "/" . urlencode($res [1]);
-		$sql = "insert into  tl_video_translate (url,file_name,video_uuid,create_time,status,device_type,file_type) values('".$urls."','".$file_name."','".$uuid."',".time().",1,0,0)"; 
-		
+		$sql = "insert into  tl_video_translate (url,file_name,video_uuid,create_time,status,device_type,file_type) values('".$urls."','".$file_name."','".$uuid."',".time().",1,0,0)";
 		
 		$Model = M ();
 		$Model->execute ( $sql );
-        		
-		
 		
 // 		var_dump($ch);
 
@@ -169,6 +165,7 @@ class CallbakController extends Controller {
 			exit ();
 		}
 	}
+
 	function writelog($str) {
 		$open = fopen ( "log.txt", "a" );
 		fwrite ( $open, $str );

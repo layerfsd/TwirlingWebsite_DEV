@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>拓灵全景音乐</title>
+<link rel="shortcut icon" href="http://static.twirlingvr.com/yun/website/images/favicon.ico"  >
+</head>
+<body>
+  <style>
+  body{
+    margin: 0;
+  }
+  #demo-player-viewport {
+    background-color: #000;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+  }
+  @media only screen and (max-width: 700px) {
+    #demo-player-viewport {
+      background-color: #000;
+      box-sizing: border-box;
+      position: absolute;
+      width: 300px;
+      height:160px;
+      left: 0;
+      top: 0;
+      margin: 0;
+    }
+  }
+  </style>
+  <script>
+    var WebVRConfig = {
+      DEFER_INITIALIZATION: true,
+      DIRTY_SUBMIT_FRAME_BINDINGS: true,
+      BUFFER_SCALE: 0.6 // 0.5 ~ 0.75
+    };
+  </script>
+  <script src="__PUBLIC__/Home/script/omniTone/webvr-polyfill.js"></script>
+  <script src="__PUBLIC__/Home/script/omniTone/wglu-url.js"></script>
+  <script>
+    // Always use WebVRPolyfill because there is no stable browser that supports
+    // WebVR natively at the moment.
+    if (!WGLUUrl.getBool('polyfill', false)) {
+      InitializeWebVRPolyfill();
+    }
+  </script>
+  <script src="__PUBLIC__/Home/script/omniTone/gl-matrix-min.js"></script>
+  <script src="__PUBLIC__/Home/script/omniTone/wglu-program.js"></script>
+  <script src="__PUBLIC__/Home/script/omniTone/vr-panorama.js"></script>
+  <script src="__PUBLIC__/Home/script/omniTone/vr-samples-util.js"></script>
+  <script src="__PUBLIC__/Home/script/omniTone/omnitone.js"></script>
+  <script>
+/*
+  var OmnitoneDemoContentData = {
+    'twirling': {
+        title: 'twirling by Tim Fain',
+        stereoscopic: true,
+        urlSet: {
+          'mp4_720p': '__PUBLIC__/omniTone/source/resonance-720p-h264-aac.mp4',
+          'mp4_1080p': '__PUBLIC__/omniTone/source/resonance-1080p-h264-aac.mp4',
+          'webm_1080p': '__PUBLIC__/omniTone/source/resonance-1080p-vp9-vorbis-excerpt.webm',
+          'mp4_1080p_excerpt': '__PUBLIC__/omniTone/source/resonance-1080p-h264-aac-excerpt.mp4'
+        }
+      }
+  };
+*/
+var OmnitoneDemoContentData = {
+  'twirling': {
+      title: 'twirling by Tim Fain',
+      stereoscopic: false,
+      urlSet: {
+        // 'mp4_720p': 'http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/down_2016-06-02/d0d82af3-a2a1-ed08-5773-574f0eb7d8e5_666_1464856630_666_conversation.mp3',
+        // 'mp4_1080p': 'http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/down_2016-06-02/d0d82af3-a2a1-ed08-5773-574f0eb7d8e5_666_1464856630_666_conversation.mp3',
+        // 'mp4_1080p_excerpt': 'http://yun-twirlingvr.oss-cn-hangzhou.aliyuncs.com/down_2016-06-02/d0d82af3-a2a1-ed08-5773-574f0eb7d8e5_666_1464856630_666_conversation.mp3'
+        'mp4_720p': '__PUBLIC__/omniTone/source/christmas2.mp4',
+        'mp4_1080p': '__PUBLIC__/omniTone/source/christmas2.mp4',
+        'webm_1080p': '__PUBLIC__/omniTone/source/christmas2.mp4',
+        'mp4_1080p_excerpt': '__PUBLIC__/omniTone/source/christmas2.mp4'
+      }
+    }
+};
+  </script>
+
+  <script src="__PUBLIC__/Home/script/jQuery19.js"></script>
+  <script src="__PUBLIC__/Home/script/omniTone/demo/demo-player.js"></script>
+
+
+
+    <!-- demo player -->
+    <div id="demo-player-viewport"></div>
+
+
+  <script>
+    OmnitoneDemoPlayer.initialize('demo-player-viewport');
+  </script>
+</body>
+</html>
