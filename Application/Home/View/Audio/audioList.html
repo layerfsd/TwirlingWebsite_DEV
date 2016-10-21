@@ -137,6 +137,9 @@
                     $("#upload-cover1").attr("src", data[0].cover);
                     $('#upload-title2').html(data[1].title);
                     $("#upload-cover2").attr("src", data[1].cover);
+                    for (each in data) {
+//                        document.write(each.cover);
+                    }
                     // alert($("#upload-cover").attr("src"));
 
                     // document.getElementsById("upload-cover").setAttribute("name",data[0].cover);
@@ -215,9 +218,8 @@
                 <figure>
                     <div class="img-box">
                         <p>
-                            <a href="./audio<?php echo $k+1 ?>.html?id=twirling" target="_blank">
-                                <img alt='时代拓灵' src="<?php echo $v['pic_url']?>"/>
-                            </a>
+                            <a href="./audio<?php echo $k+1 ?>.html?id=twirling" target="_blank"><img alt='时代拓灵'
+                                                                                                      src="<?php echo $v['pic_url']?>"/></a>
                         </p>
                         <audio controls="controls">
                             <source src="<?php echo $v['mp3']?>" type="audio/mpeg">

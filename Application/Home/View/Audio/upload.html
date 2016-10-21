@@ -6,7 +6,6 @@
 
 <script>
     $(function () {
-
     })
     //   $(function(){
 
@@ -33,8 +32,6 @@
     //       d.close().remove();
     //   }, 2000);
     // })
-
-
 </script>
 <style>
     /*#body{
@@ -56,14 +53,13 @@
     }
 </style>
 <include file="Public/header"/>
-
 <div id="body" class="container" style="background:#EDEDF0">
+
     <div class="video-title" style="border-bottom:1px solid silver;height:35px">
         <h2>音频信息</h2>
     </div>
 
     <div class="row">
-
         <form class="form-horizontal" id="form-validate">
             <div class="form-group">
                 <div class="col-md-offset-3  col-md-6 col-sm-6 control-label">
@@ -88,9 +84,10 @@
                 </div>
                 <div class="col-md-offset-3 col-md-5 col-sm-5">
                     <input name="upload_cover" type="file" style="margin:5px 0 0 0"
-                           accept="image/jpg,image/png,image/gif" id="coverphoto" onchange="previewImage(this)"></input>
+                           accept="image/jpg,image/png,image/gif" id="coverphoto" onchange="previewImage(this)"/>
 
-                    <div id="img-src" style="width:200px;height:200px;margin:5px 0px 0px 0px">
+                    <div id="img-src"
+                         style="width:200px;height:200px;margin:5px 0px 0px 0px">
                         <img id="imaghead" class="img-responsive" id="img-show"
                              src='__PUBLIC__/Home/images/upload.png'/>
                     </div>
@@ -103,7 +100,11 @@
             格式仅限: wav</span></label>
                 </div>
                 <div class="col-md-offset-3  col-md-5 col-sm-5">
-                    <input name="upload_file" type="file" style="margin:5px 0 0 0" id="audioPath" accept="audio/wav"/>
+                    <!--  <input name="upload_file" type="file" style="margin:5px 0 0 0"  id="audioPath" accept="audio/wav"/> -->
+                    <a id="selectfiles">
+                        <input name="upload_file" type="file" style="margin:5px 0 0 0"
+                               id="audioPath" accept="audio/wav"/>
+                    </a>
                 </div>
             </div>
 
@@ -122,6 +123,7 @@
 <include file="Public/footer"/>
 <script src="__PUBLIC__/Home/script/jQuery19.js"></script>
 <script src="__PUBLIC__/uploadify/jquery.validate.js"></script>
+<script type="text/javascript" src="/Public/plupload-2.1.2/js/upload_video.js"></script>
 <script>
     $(document).ready(function () {
         // $("input").focus(function(){})
@@ -167,9 +169,11 @@
             // invaldHandler:function(form,validator){
             //  return false;
             // }
+
         })
+
     })
-    // })
+
     //图片上传预览    IE是用了滤镜。
     function previewImage(file) {
         var MAXWIDTH = 260;
